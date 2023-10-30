@@ -602,7 +602,7 @@ if ($resultCount) {
                 <div class="modal-content2">
                   <span class="close2" id="closeModal">&times;</span>
                   <h1 style="font-weight:bolder; color: #fff; font-size: 30px; margin-top: -50px" >Violator's Details</h1><br>
-                  <div id="modalContent">
+                  <div id="modalContent2">
                   
                 </div>
               </div>

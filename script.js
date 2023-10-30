@@ -413,6 +413,8 @@ $(document).ready(function() {
   // Use event delegation to handle click events for dynamic rows
   $('#violatorTableBody').on('click', 'tr', function () {
     var rowId = $(this).data('row-id');
+    var license = $(this).data('license_number');
+    
     console.log('Clicked row ID: ' + rowId);
 
     // Make an AJAX request to fetch the entire row data
@@ -420,11 +422,22 @@ $(document).ready(function() {
       type: "GET",
       url: "test.php?id=" + rowId,
       success: function (data) {
-        $("#modalContent").html(data);
+        $("#modalContent2").html(data);
         modal.css("display", "block");
       }
     });
   });
+
+  $.ajax({
+    type: "GET",
+    url: "test2.php?id=" + rowId,
+    success: function (data) {
+      $("#modalContent3").html(data);
+      modal.css("display", "block");
+    }
+  });
+});
+
 
   closeModal.click(function () {
     modal.css("display", "none");
@@ -436,4 +449,21 @@ $(document).ready(function() {
       modal.css("display", "none");
     }
   });
-});
+
+
+//============MODAL TAB============
+    function openModalTab(evt, tabName) {
+        var i, modalTabcontent, modalTablinks;
+        modalTabcontent = document.getElementsByClassName("modal-tabcontent");
+        for (i = 0; i < modalTabcontent.length; i++) {
+            modalTabcontent[i].style.display = "none";
+        }
+        modalTablinks = document.getElementsByClassName("modal-tablinks");
+        for (i = 0; i < modalTablinks.length; i++) {
+            modalTablinks[i].className = modalTablinks[i].className.replace(" active", "");
+        }
+        document.getElementById(tabName).style.display = "block";
+        evt.currentTarget.className += " active";
+    }
+
+    

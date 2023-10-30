@@ -3,11 +3,11 @@
 session_start();
 
 // Check if the user is not logged in (session variable not set)
-if (!isset($_SESSION['user_id'])) {
+//if (!isset($_SESSION['user_id'])) {
     // Redirect to the login page (index.php)
-    header("Location: index.php");
-    exit();
-}
+ //   header("Location: index.php");
+ //   exit();
+//}
 $databaseHost = 'localhost';
         $databaseUsername = 'root';
         $databasePassword = '';
@@ -474,89 +474,163 @@ if ($resultCount) {
        <button id="successList"><i aria-hidden="true"></i> Settled List</button>
        <button id="failedList"><i aria-hidden="true"></i> Unsettled List</button>
      </div>
-       <div id="searchResults4">
-              <?php if ($resultInt->num_rows > 0) : ?>
-                <div class="content-table">
-            <table >
-                <thead>
-                        <th>Ticket No.</th>
-                        <th>Name</th>
-                        <th>PlateNumber</th>
-                        <th>OR Number</th>
-                        <th>OR Date</th>
-                        <th>Status</th>
-                    </tr>
-                </thead>
-                <tbody id="violatorTableBody">
-                    <?php while ($row = $resultInt->fetch_assoc()) : ?>
-                        <tr data-row-id="<?= $row['id'] ?>">
-                            <td><?= $row['TicketNo'] ?></td>
-                            <td><?= $row['Name'] ?></td>
-                            <td><?= $row['PlateNumber'] ?></td>
-                            <td><?= $row['ORNo'] ?></td>
-                            <td><?= $row['ORDate'] ?></td>
-                            <td><?= $row['Status'] ?></td>
-                        </tr>
-                    <?php endwhile; ?>
-                </tbody>
-            </table>
-            <?php else : ?>
-                <p>No Violators Found</p>
-            <?php endif; ?>
+        <div id="searchResults4">
+                <?php if ($resultInt->num_rows > 0) : ?>
+                  <div class="content-table">
+              <table >
+                  <thead>
+                          <th>Ticket No.</th>
+                          <th>Name</th>
+                          <th>PlateNumber</th>
+                          <th>OR Number</th>
+                          <th>OR Date</th>
+                          <th>Status</th>
+                      </tr>
+                  </thead>
+                  <tbody id="violatorTableBody">
+                      <?php while ($row = $resultInt->fetch_assoc()) : ?>
+                        <tr data-row-id="<?= $row['id'] ?>" data-license_number="<?= $row['LicenseNumber'] ?>">
+                              <td><?= $row['TicketNo'] ?></td>
+                              <td><?= $row['Name'] ?></td>
+                              <td><?= $row['PlateNumber'] ?></td>
+                              <td><?= $row['ORNo'] ?></td>
+                              <td><?= $row['ORDate'] ?></td>
+                              <td><?= $row['Status'] ?></td>
+                              <td>
+                                <button class="delete-button" data-row-id="<?= $row['id'] ?>">Delete</button>
+                            </td>
+                          </tr>
+                      <?php endwhile; ?>
+                  </tbody>
+              </table>
+              <?php else : ?>
+                  <p>No Violators Found</p>
+              <?php endif; ?>
+          </div>
+          </div>
+      </div>
+        <!-- Hidden modal for violator details -->
+        <div id="myModal2" class="modal2">
+    <div class="modal-content2">
+        <span class="close2" id="closeModal">&times;</span>
+        <h1 style="font-weight: bolder; color: #fff; font-size: 30px; margin-top: -50px">Violator's Details</h1><br>
+        <!-- Tab navigation for the modal only -->
+        <div class="modal-tab">
+            <button class="modal-tablinks" onclick="openModalTab(event, 'currentTab')">Current</button>
+            <button id="historyTabButton" class="modal-tablinks" onclick="openModalTab(event, 'historyTab')">History</button>
         </div>
+        <!-- Tab content for the modal only -->
+        <div id="currentTab" class="modal-tabcontent">
+            <div id="modalContent2"></div>
+            <div id="modalContent"></div>
         </div>
-     </div>
-       <!-- Hidden modal for violator details -->
-          <div id="myModal2" class="modal2">
-                <div class="modal-content2">
-                  <span class="close2" id="closeModal">&times;</span>
-                  <h1 style="font-weight:bolder; color: #fff; font-size: 30px; margin-top: -50px" >Violator's Details</h1><br>
-                  <div id="modalContent">
-                  
-                </div>
-              </div>
-
+        <div id="historyTab" class="modal-tabcontent">
+           <div id="modalContent3"></div>
+            
+        </div>
+    </div>
 </div>
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script>
-  $(document).ready(function () {
-      // Get the modal element and close button
-      var modal = $("#myModal2");
-      var closeModal = $("#closeModal");
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script>
+ $(document).ready(function () {
+    var modal = $("#myModal2");
+    var closeModal = $("#closeModal");
 
-      // Add a click event listener to the table rows
-      $('#violatorTableBody tr').click(function () {
+    
+
+    // Handle the "Delete" button click
+    $('.delete-button').click(function () {
         var rowId = $(this).data('row-id');
-        console.log('Clicked row ID: ' + rowId);
 
-        // Make an AJAX request to fetch the entire row data from the 'payments' table
-        $.ajax({
-          type: "GET",
-          url: "test.php?id=" + rowId, // Update the URL to your PHP script
-          success: function (data) {
-            // Display the fetched data in the modal
-            $("#modalContent").html(data);
+        // Prompt the user for confirmation before deleting
+        if (confirm('Are you sure you want to delete this row?')) {
+            // User confirmed, proceed with the delete operation
 
-            // Show the modal
-            modal.css("display", "block");
-          }
-        });
-      });
-
-      // Close the modal when the close button is clicked
-      closeModal.click(function () {
-        modal.css("display", "none");
-      });
-
-      // Close the modal when the user clicks outside of it
-      $(window).click(function (e) {
-        if (e.target === modal[0]) {
-          modal.css("display", "none");
+            // Perform the delete operation via AJAX
+            $.ajax({
+                type: "POST",
+                url: "delete.php",
+                data: { id: rowId, confirmed: 'true' }, // Add 'confirmed' parameter
+                success: function (response) {
+                    // Refresh the page after successful deletion
+                    location.reload();
+                }
+            });
         }
-      });
     });
 
-</script>
+      $('#violatorTableBody tr').click(function () {
+          var rowId = $(this).data('row-id');
+          var modalContent = $("#modalContent");
+          modalContent.empty(); // Clear existing content
+
+          $.ajax({
+              type: "GET",
+              url: "test.php?id=" + rowId, // Update the URL to your PHP script
+              success: function (data) {
+                  modal.css("display", "block");
+
+                  var editButton = $("<button>Edit</button>").addClass("edit-button");
+                  var statusDropdown = $("<select><option value='Settled'>Settled</option><option value='Unsettled'>Unsettled</option></select>");
+
+                  editButton.click(function () {
+                      // Create input fields
+                      var licenseNumberInput = $("<input type='text' id='LicenseNumberInput' value='" + $("#LicenseNumber").text() + "'>");
+                      var orNoInput = $("<input type='text' id='ORNoInput' value='" + $("#ORNo").text() + "'>");
+                      var orDateInput = $("<input type='date' id='ORDateInput' value='" + $("#ORDate").text() + "'>");
+
+                      // Show the input fields
+                      modalContent.append("<p><strong>LicenseNumber:</strong></p>").append(licenseNumberInput);
+                      modalContent.append("<p><strong>ORNo:</strong></p>").append(orNoInput);
+                      modalContent.append("<p><strong>ORDate:</strong></p>").append(orDateInput);
+                      modalContent.append("<p><strong>Status:</strong></p>").append(statusDropdown);
+
+                      var saveButton = $("<button>Save</button>").addClass("edit-button");
+
+                      saveButton.click(function () {
+                          var editedLicenseNumber = $("#LicenseNumberInput").val();
+                          var editedORNo = $("#ORNoInput").val();
+                          var editedORDate = $("#ORDateInput").val();
+                          var selectedStatus = statusDropdown.val();
+
+                          $.ajax({
+                              type: "POST",
+                              url: "update.php",
+                              data: {
+                                  id: rowId,
+                                  LicenseNumber: editedLicenseNumber,
+                                  ORNo: editedORNo,
+                                  ORDate: editedORDate,
+                                  Status: selectedStatus
+                              },
+                              success: function (response) {
+                                  alert("Data updated successfully!");location.reload();
+                              }
+                          });
+                      });
+
+                      modalContent.append(saveButton);
+                  });
+
+                  // Show the "Edit" button in the modal
+                  modalContent.append(editButton);
+              }
+          });
+      });
+
+      closeModal.click(function () {
+          modal.css("display", "none");
+      });
+
+      $(window).click(function (e) {
+          if (e.target === modal[0]) {
+              modal.css("display", "none");
+          }
+      });
+  });
+  </script>
+
+
 
 
 
