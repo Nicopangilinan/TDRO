@@ -308,8 +308,8 @@ if ($resultCount) {
         <input type="text" name="or_number" id="or_number" class="disabled-field">
     </div>
     <div class="form-group">
-        <label for="license_number">License Number:<span class="required">*</span></label>
-        <input type="text" name="license_number" id="license_number" required>
+        <label for="license_number">License Number:</label>
+        <input type="text" name="license_number" id="license_number">
     </div>
 </div>
 
@@ -599,14 +599,34 @@ if ($resultCount) {
    </div>
           <!-- Hidden modal for violator details -->
           <div id="myModal" class="modal2">
-                <div class="modal-content2">
-                  <span class="close2" id="closeModal">&times;</span>
-                  <h1 style="font-weight:bolder; color: #fff; font-size: 30px; margin-top: -50px" >Violator's Details</h1><br>
-                  <div id="modalContent2">
+            <div class="modal-content2">
+              <span class="close2" id="closeModal">&times;</span>
+              <h1 style="font-weight: bolder; color: #fff; font-size: 30px; margin-top: -50px">Violator's Details</h1><br>
+              <div id="modalContent2">
                   
                 </div>
               </div>
           </div>
+          <script>
+  $(document).ready(function () {
+    // Get a reference to the modal and the close button
+    var modal = document.getElementById("myModal");
+    var closeModal = document.getElementById("closeModal");
+
+    // When the close button is clicked, hide the modal
+    closeModal.onclick = function () {
+      modal.style.display = "none";
+    };
+
+    // When the user clicks outside the modal, hide the modal
+    window.onclick = function (event) {
+      if (event.target == modal) {
+        modal.style.display = "none";
+      }
+    };
+  });
+</script>
+
 </div>
      </div>
      </div>

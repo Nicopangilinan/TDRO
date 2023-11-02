@@ -233,42 +233,46 @@ document.getElementById('showAll').addEventListener('click', function () {
   }
 
 //modal
-const openModalButtons = document.querySelectorAll('[data-modal-target]')
-        const closeModalButtons = document.querySelectorAll('[data-close-button]')
-        const overlay = document.getElementById('overlay')
 
-        openModalButtons.forEach(button => {
-            button.addEventListener('click', () => {
-                const modal = document.querySelector(button.dataset.modalTarget)
-                openModal(modal)
-            })
-        })
+const openModalButtons = document.querySelectorAll('[data-modal-target]');
+const closeModalButtons = document.querySelectorAll('[data-close-button]');
+const overlay = document.getElementById('overlay');
 
-        closeModalButtons.forEach(button => {
-            button.addEventListener('click', () => {
-                const modal = button.closest('.modal')
-                closeModal(modal)
-            })
-        })
+console.log(openModalButtons);
 
-        overlay.addEventListener('click', () => {
-            const modals = document.querySelectorAll('.modal.active')
-            modals.forEach(modal => {
-                closeModal(modal)
-            })
-        })
+openModalButtons.forEach(button => {
+    button.addEventListener('click', () => {
+        const modal = document.querySelector(button.dataset.modalTarget);
+        openModal(modal);
+    });
+});
 
-        function openModal(modal) {
-            if (modal == null) return
-            modal.classList.add('active')
-            overlay.classList.add('active')
-        }
+closeModalButtons.forEach(button => {
+    button.addEventListener('click', () => {
+        const modal = button.closest('.modal');
+        closeModal(modal);
+    });
+});
 
-        function closeModal(modal) {
-            if (modal == null) return
-            modal.classList.remove('active')
-            overlay.classList.remove('active')
-        }
+overlay.addEventListener('click', () => {
+    const modals = document.querySelectorAll('.modal.active');
+    modals.forEach(modal => {
+        closeModal(modal);
+    });
+});
+
+function openModal(modal) {
+    if (modal == null) return;
+    modal.classList.add('active');
+    overlay.classList.add('active');
+}
+
+function closeModal(modal) {
+    if (modal == null) return;
+    modal.classList.remove('active');
+    overlay.classList.remove('active');
+}
+
 
         overlay.addEventListener('click', () => {
           const modals = document.querySelectorAll('.modal.active')
@@ -406,15 +410,16 @@ function closeViolationDetailsModal() {
 }
 
 // Violator Modal 
-$(document).ready(function() {
+$(document).ready(function () {
   var modal = $("#myModal");
   var closeModal = $("#closeModal");
 
   // Use event delegation to handle click events for dynamic rows
   $('#violatorTableBody').on('click', 'tr', function () {
     var rowId = $(this).data('row-id');
-    var license = $(this).data('license_number');
-    
+    var license = $(this).data('license-number');
+
+    console.log('LICENSE: ' + license);
     console.log('Clicked row ID: ' + rowId);
 
     // Make an AJAX request to fetch the entire row data
@@ -426,18 +431,16 @@ $(document).ready(function() {
         modal.css("display", "block");
       }
     });
-  });
 
-  $.ajax({
-    type: "GET",
-    url: "test2.php?id=" + rowId,
-    success: function (data) {
-      $("#modalContent3").html(data);
-      modal.css("display", "block");
-    }
+    $.ajax({
+      type: "GET",
+      url: "test2.php?license=" + license,
+      success: function (data) {
+        $("#modalContent3").html(data);
+        modal.css("display", "block");
+      }
+    });
   });
-});
-
 
   closeModal.click(function () {
     modal.css("display", "none");
@@ -449,6 +452,8 @@ $(document).ready(function() {
       modal.css("display", "none");
     }
   });
+});
+
 
 
 //============MODAL TAB============
@@ -466,4 +471,45 @@ $(document).ready(function() {
         evt.currentTarget.className += " active";
     }
 
+    document.addEventListener('DOMContentLoaded', function() {
+      const filterButtons = document.querySelectorAll('.filter-buttons button[data-filter]');
+      const filterInput = document.querySelector('input[name="filter"]');
+    
+      // Check if there's a saved filter state in local storage
+      const savedFilter = localStorage.getItem('activeFilter');
+    
+      // Set the active state based on the saved filter, if any
+      if (savedFilter) {
+        filterButtons.forEach(button => {
+          if (button.getAttribute('data-filter') === savedFilter) {
+            button.classList.add('active');
+          }
+        });
+    
+        // Apply the saved filter value to the filter input field
+        filterInput.value = savedFilter;
+      }
+    
+      // Add click event listeners to the filter buttons
+      filterButtons.forEach(button => {
+        button.addEventListener('click', function() {
+          const filterValue = this.getAttribute('data-filter');
+    
+          // Remove active state from all buttons
+          filterButtons.forEach(btn => btn.classList.remove('active'));
+    
+          // Add active state to the clicked button
+          this.classList.add('active');
+    
+          // Set the active filter in local storage
+          localStorage.setItem('activeFilter', filterValue);
+    
+          // Apply the filter value to the filter input field
+          filterInput.value = filterValue;
+    
+          // Submit the form
+          this.closest('form').submit();
+        });
+      });
+    });
     

@@ -62,19 +62,41 @@ function getLastUpdatedTime2($conn) {
     $result = $conn->query($sql)
 ?>
 <?php
- $databaseHost = 'localhost';
- $databaseUsername = 'root';
- $databasePassword = '';
- $dbname = "tdroDB";
-    
-$conn = new mysqli($databaseHost, $databaseUsername, $databasePassword, $dbname);
+$databaseHost = 'localhost';
+$databaseUsername = 'root';
+$databasePassword = '';
+$dbname = "tdroDB";
 
+// Create a database connection
+$conn = new mysqli($databaseHost, $databaseUsername, $databasePassword, $dbname);
 
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
-$sqlInt = "SELECT * FROM data_info ";
-    $resultInt = $conn->query($sqlInt)
+
+$searchTerm = isset($_POST['search']) ? $_POST['search'] : '';
+$filter = isset($_POST['filter']) ? $_POST['filter'] : 'all';
+
+if (!empty($searchTerm)) {
+    $sqlInt = "SELECT * FROM data_info WHERE (TicketNo LIKE '%$searchTerm%' OR Name LIKE '%$searchTerm%')";
+} else {
+    switch ($filter) {
+        case 'settled':
+            $sqlInt = "SELECT * FROM data_info WHERE Status = 'Settled'";
+            break;
+        case 'unsettled':
+            $sqlInt = "SELECT * FROM data_info WHERE Status = 'Unsettled'";
+            break;
+        case 'casefiles':
+            $sqlInt = "SELECT * FROM data_info WHERE Status = 'Unsettled' AND DATE_ADD(CreatedDate, INTERVAL 1 WEEK) <= NOW()";
+            break;
+        default:
+            $sqlInt = "SELECT * FROM data_info";
+            break;
+    }
+}
+
+$resultInt = $conn->query($sqlInt);
 ?>
 <?php
 $databaseHost = 'localhost';
@@ -269,46 +291,27 @@ if ($resultCount) {
               <div class="box">
                 <h2>Case File</h2>
                 <p><?= $totalMaster ?>
-                <h5 style="font-weight:lighter;">Updated<?php echo getLastUpdatedTime2($conn); ?> </h5>
               </div>
             </div>
             <div class="box-container">
-              <div class="box-a">
-                <div class="chart">
-                  <canvas id="linechart" width="400" height="440"></canvas>
-                </div>
-              </div>
-              <div class="box-a">
-              <button data-modal-target="#map-modal" class="viewbutton">View Map</button>
-             <div class="modal" id="map-modal">
-              <div class="modal-header">
-                <div class="title">'Overall Map View List of Violations'</div>
-                  <center><h1>Google Map</h1></center>
-                  <div id="map"></div>
-              </div>
-              <button data-close-button class="close-button">&times;</button>
-              <div class="modal-body">
-                <div class="box-c">
-                </div>
+  <div class="box-a">
+    <div class="chart">
+      <canvas id="linechart" width="400" height="300"></canvas>
     </div>
+  </div>
+  <div class="box-a">
+    <div class="chart">
+      <canvas id="doughnut" width="250px" height="250px"></canvas>
     </div>
-                <div class="chart">
-                  <canvas id="barchart" width="400" height="410"></canvas>
-                </div>
-              </div>
-              <div class="box-a">
-                <div class="chart">
-                  <canvas id="doughnut" width="100" height="200"></canvas>
-                </div>
-              </div>
-            </div>
-          </div>
+  </div>
+</div>
+</div>
           <div class="tab-pane" id="violation-record">
             <!-- violation-record CONTENT -->
             <h1>Violator's Records</h1>
          <div class="box-container">
 <!-- FIRST MODAL -->
-           <div class="box">
+<div class="box">
             <button data-modal-target="#modal" class="arrow-button">🡆</button>
             <div id="overlay"></div>
              <div class="modal" id="modal">
@@ -319,7 +322,7 @@ if ($resultCount) {
               <div class="modal-body">
                 <div class="box-c">
                   <div class="search-bar">
-                  <input type="text" id="searchInput1" placeholder="Search by Name or #">
+                  <input class="search-input" type="text" id="searchInput1" placeholder="Search by Name or #">
                 </div>
                 <div id="searchResults">
                 <?php if ($resultInfo->num_rows > 0) : ?>
@@ -351,7 +354,7 @@ if ($resultCount) {
              </div>
              </div>
              
-             <h2 style="margin-top: -30px;">Total Contact Apprehensions</h2>
+             <h2 style="margin-top: -30px">Total Contact Apprehensions</h2>
              <p><?= $totalApprehensions ?></p>
              
            </div>
@@ -367,7 +370,7 @@ if ($resultCount) {
               <div class="modal-body">
                 <div class="box-c">
                   <div class="search-bar">
-                  <input type="text" id="searchInput2" placeholder="Search by Name or Plate#">
+                  <input type="text" class="search-input" id="searchInput2" placeholder="Search by Name or Plate#">
                 </div>
                 <div id="searchResults2">
                 <?php if ($resultInfoS->num_rows > 0) : ?>
@@ -376,6 +379,7 @@ if ($resultCount) {
                 <tr>
                     <th>Ticket No.</th>
                     <th>Plate Number</th>
+                    <th>License Number</th>
                     <th>Apprehending Officer</th>
                 </tr>
             </thead>
@@ -384,6 +388,7 @@ if ($resultCount) {
                   <tr class="table-row">
                         <td ><?= $row['TicketNo'] ?></td>
                         <td><?= $row['PlateNumber'] ?></td>
+                        <td><?= $row['LicenseNumber'] ?></td>
                         <td><?= $row['Officer'] ?></td>
                     </tr>
                 <?php endwhile; ?>
@@ -395,11 +400,11 @@ if ($resultCount) {
     </div>           </div>
              </div>
              </div>
-             <h2 style="margin-top: -30px;">Total No Contact Apprehensions</h2>
+             <h2 style="margin-top: -30px">Total No Contact Apprehensions</h2>
              <p><?= $totalApprehensionsN ?></p>
            </div>
          </div>
-       
+
            <!--ALL-->
            <div class="box-b">
              <h2>List of Total Apprehension with Contact and No Contact</h2>
@@ -465,16 +470,22 @@ if ($resultCount) {
           </div>
          <div class="tab-pane" id="master-list">
            <!-- master-list CONTENT -->
-           <div class="box-b" style=" height: 600px;">
-     <div class="search-bar">
-       <input type="text" class="search-input" id="searchInput4" placeholder="Search by Name or #">
-     </div>
-     <div class="filter-buttons">
-       <button id="showAll"><i aria-hidden="true"></i> Show All</button>
-       <button id="successList"><i aria-hidden="true"></i> Settled List</button>
-       <button id="failedList"><i aria-hidden="true"></i> Unsettled List</button>
-     </div>
-        <div id="searchResults4">
+           <div class="box-b" style="height: 600px;">
+  <div class="search-bar">
+    <form method="post" action="">
+      <input type="text" class="search-input" name="search" placeholder="Search by Name or #">
+      <button class="edit-button                                                                                              " type="submit">Search</button>
+    </form>
+  </div>
+  <div class="filter-buttons">
+    <form method="post" action="">
+      <button type="submit" name="filter" value="all"><i aria-hidden="true"></i> Show All</button>
+      <button type="submit" name="filter" value="settled"><i aria-hidden="true"></i> Settled List</button>
+      <button type="submit" name="filter" value="unsettled"><i aria-hidden="true"></i> Unsettled List</button>
+      <button type="submit" name="filter" value="casefiles"><i aria-hidden="true"></i> Case Files</button>
+    </form>
+  </div>
+  <div id="searchResults4">
                 <?php if ($resultInt->num_rows > 0) : ?>
                   <div class="content-table">
               <table >
@@ -489,7 +500,7 @@ if ($resultCount) {
                   </thead>
                   <tbody id="violatorTableBody">
                       <?php while ($row = $resultInt->fetch_assoc()) : ?>
-                        <tr data-row-id="<?= $row['id'] ?>" data-license_number="<?= $row['LicenseNumber'] ?>">
+                        <tr data-row-id="<?= $row['id'] ?>" data-license-number="<?= $row['LicenseNumber'] ?>">
                               <td><?= $row['TicketNo'] ?></td>
                               <td><?= $row['Name'] ?></td>
                               <td><?= $row['PlateNumber'] ?></td>
@@ -531,6 +542,44 @@ if ($resultCount) {
     </div>
 </div>
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script>
+    // Violator Modal 
+    console.log("Script is running");
+$(document).ready(function() {
+  var modal = $("#myModal");
+  var closeModal = $("#closeModal");
+
+  // Use event delegation to handle click events for dynamic rows
+  $('#violatorTableBody').on('click', 'tr', function () {
+    var rowId = $(this).data('row-id');
+    var license = $(this).data('license-number');
+    
+    console.log('LICENSE: ' + license);
+    console.log('Clicked row ID: ' + rowId );
+
+    // Make an AJAX request to fetch the entire row data
+    $.ajax({
+      type: "GET",
+      url: "test.php?id=" + rowId,
+      success: function (data) {
+        $("#modalContent2").html(data);
+        modal.css("display", "block");
+      }
+    });
+    $.ajax({
+      type: "GET",
+      url: "test2.php?license=" + license,
+      success: function (data) {
+        $("#modalContent3").html(data);
+        modal.css("display", "block");
+      }
+    });
+  });
+
+  
+});
+
+  </script>
   <script>
  $(document).ready(function () {
     var modal = $("#myModal2");
@@ -629,11 +678,6 @@ if ($resultCount) {
       });
   });
   </script>
-
-
-
-
-
     </div>
     </div>
    </div>

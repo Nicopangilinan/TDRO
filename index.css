@@ -288,6 +288,18 @@
     background: linear-gradient(45deg, #0c2727 0%, #1b5757 99%);
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#9bc635', endColorstr='#c0ea67', GradientType=1 );
   }
+
+  canvas {
+    max-width: 100%; /* Ensure the canvas does not exceed its container's width */
+    max-height: 100%;
+  }
+  .chart {
+    width: 100%; /* Make sure the chart container takes the full width of .box-a */
+    height: 100%; /* Make sure the chart container takes the full height of .box-a */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
   .box-b {
     flex: 1;
     height: 340px;
@@ -406,7 +418,7 @@
   align-items: center;
   margin-top: 20px;
   padding-bottom: 20px;
-  display: inline-block;
+  display: flex;
 }
 
 .search-bar input {
@@ -434,8 +446,6 @@
 .filter-buttons {
   display: flex;
   justify-content: center;
-  margin-top: 10px;
-  display: inline-block;
 }
 
 .filter-buttons button {
@@ -939,4 +949,15 @@ textarea {
   background-color: #0c2727;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
   text-align: left;
+}
+
+.filter-buttons button:active,
+.filter-buttons button:focus {
+  background-color: #003a75; /* Change the background color when the button is active or focused */
+}
+
+/* Hover effect for filter buttons */
+.filter-buttons button:hover {
+  background-color: #0056b3;
+  transition: background-color 0.3s; /* Add a smooth transition effect */
 }
