@@ -97,7 +97,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <img src="../img/Background.png" class="img-fluid" style="width: 100px !important; padding-right: 20px" alt="BatangasLogo">
     </div>
     <div class="col-md-4 text-center">
-        <span class="h1 fw-bold mb-0">Enter</span>
+        <span class="h1 fw-bold mb-0">Log In</span>
     </div>
     <div class="col-md-4 d-flex justify-content-start">
         <img src="img/magkatuwang.jpg" class="img-fluid" style="width: 100px !important; padding-left: 20px" alt="Magkatuwang tayo logo">
@@ -124,7 +124,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <!-- Checkbox -->
 <div class="form-check">
 <input class="form-check-input" type="checkbox" value="" id="form1Example3" unchecked />
-<label class="form-check-label" for="form1Example3"> Remember me </label>
+<label class="form-check-label" for="form1Example3"> Remember Me </label>
 </div>
 </div>
 
