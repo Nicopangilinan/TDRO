@@ -2,16 +2,16 @@
 // Start the session
 session_start();
 
-// Check if the user is not logged in (session variable not set)
-//if (!isset($_SESSION['user_id'])) {
-    // Redirect to the login page (index.php)
- //   header("Location: index.php");
- //   exit();
-//}
+ //Check if the user is not logged in (session variable not set)
+if (!isset($_SESSION['user_id'])) {
+   //  Redirect to the login page (index.php)
+    header("Location: index.php");
+    exit();
+}
 $databaseHost = 'localhost';
-        $databaseUsername = 'root';
-        $databasePassword = '';
-        $dbname = "tdroDB";
+ $databaseUsername = 'u488180748_TDROB4t5s';
+ $databasePassword = 'TDROB4t5s';
+ $dbname = "u488180748_TDROB4t5s";
 
 // Connect to the newly created database
 $conn = new mysqli($databaseHost, $databaseUsername, $databasePassword, $dbname);
@@ -63,10 +63,9 @@ function getLastUpdatedTime2($conn) {
 ?>
 <?php
 $databaseHost = 'localhost';
-$databaseUsername = 'root';
-$databasePassword = '';
-$dbname = "tdroDB";
-
+$databaseUsername = 'u488180748_TDROB4t5s';
+$databasePassword = 'TDROB4t5s';
+$dbname = "u488180748_TDROB4t5s";
 // Create a database connection
 $conn = new mysqli($databaseHost, $databaseUsername, $databasePassword, $dbname);
 
@@ -100,9 +99,9 @@ $resultInt = $conn->query($sqlInt);
 ?>
 <?php
 $databaseHost = 'localhost';
-$databaseUsername = 'root';
-$databasePassword = '';
-$dbname = "tdroDB";
+$databaseUsername = 'u488180748_TDROB4t5s';
+$databasePassword = 'TDROB4t5s';
+$dbname = "u488180748_TDROB4t5s";
     
 $conn = new mysqli($databaseHost, $databaseUsername, $databasePassword, $dbname);
 
@@ -116,9 +115,9 @@ $sqlInfo = "SELECT * FROM data_info WHERE Name != 'unattended'";
 <!--UNATTENDED-->
 <?php
 $databaseHost = 'localhost';
-$databaseUsername = 'root';
-$databasePassword = '';
-$dbname = "tdroDB";
+$databaseUsername = 'u488180748_TDROB4t5s';
+$databasePassword = 'TDROB4t5s';
+$dbname = "u488180748_TDROB4t5s";
 $conn = new mysqli($databaseHost, $databaseUsername, $databasePassword, $dbname);
 
 
@@ -131,9 +130,9 @@ $sqlInfoS = "SELECT * FROM data_info WHERE Name = 'unattended'";
 <!--OR NUMBER-->
 <?php
 $databaseHost = 'localhost';
-$databaseUsername = 'root';
-$databasePassword = '';
-$dbname = "tdroDB";
+$databaseUsername = 'u488180748_TDROB4t5s';
+$databasePassword = 'TDROB4t5s';
+$dbname = "u488180748_TDROB4t5s";
 
 $conn = new mysqli($databaseHost, $databaseUsername, $databasePassword, $dbname);
 
@@ -147,9 +146,9 @@ $sqlInfoO = "SELECT * FROM data_info WHERE ORNo = NULL";
 <!--COUNTER WITH CONTACT-->
 <?php
 $databaseHost = 'localhost';
-$databaseUsername = 'root';
-$databasePassword = '';
-$dbname = "tdroDB";
+$databaseUsername = 'u488180748_TDROB4t5s';
+$databasePassword = 'TDROB4t5s';
+$dbname = "u488180748_TDROB4t5s";
 
 $conn = new mysqli($databaseHost, $databaseUsername, $databasePassword, $dbname);
 
@@ -170,9 +169,9 @@ if ($resultCount) {
 <!--COUNTER WITH NO CONTACT-->
 <?php
 $databaseHost = 'localhost';
-$databaseUsername = 'root';
-$databasePassword = '';
-$dbname = "tdroDB";
+$databaseUsername = 'u488180748_TDROB4t5s';
+$databasePassword = 'TDROB4t5s';
+$dbname = "u488180748_TDROB4t5s";
 
 $conn = new mysqli($databaseHost, $databaseUsername, $databasePassword, $dbname);
 
@@ -193,9 +192,9 @@ if ($resultCount) {
 <!--COUNTER MATERLIST-->
 <?php
 $databaseHost = 'localhost';
-$databaseUsername = 'root';
-$databasePassword = '';
-$dbname = "tdroDB";
+$databaseUsername = 'u488180748_TDROB4t5s';
+$databasePassword = 'TDROB4t5s';
+$dbname = "u488180748_TDROB4t5s";
 
 $conn = new mysqli($databaseHost, $databaseUsername, $databasePassword, $dbname);
 
@@ -230,6 +229,7 @@ if ($resultCount) {
           display: none;
       }
     </style>
+    <link rel="shortcut icon" href="/img/logo.png" />
   </head>
   <body>
     <div class="banner">
@@ -404,7 +404,75 @@ if ($resultCount) {
              <p><?= $totalApprehensionsN ?></p>
            </div>
          </div>
+         <script>
+    //modal
 
+      const openModalButtons = document.querySelectorAll('[data-modal-target]');
+      const closeModalButtons = document.querySelectorAll('[data-close-button]');
+      const overlay = document.getElementById('overlay');
+
+      console.log(openModalButtons);
+
+      openModalButtons.forEach(button => {
+          button.addEventListener('click', () => {
+              const modal = document.querySelector(button.dataset.modalTarget);
+              openModal(modal);
+          });
+      });
+
+      closeModalButtons.forEach(button => {
+          button.addEventListener('click', () => {
+              const modal = button.closest('.modal');
+              closeModal(modal);
+          });
+      });
+
+      overlay.addEventListener('click', () => {
+          const modals = document.querySelectorAll('.modal.active');
+          modals.forEach(modal => {
+              closeModal(modal);
+          });
+      });
+
+      function openModal(modal) {
+          if (modal == null) return;
+          modal.classList.add('active');
+          overlay.classList.add('active');
+      }
+
+      function closeModal(modal) {
+          if (modal == null) return;
+          modal.classList.remove('active');
+          overlay.classList.remove('active');
+      }
+
+
+              overlay.addEventListener('click', () => {
+                const modals = document.querySelectorAll('.modal.active')
+                modals.forEach(modal => {
+                    closeModal(modal)
+        })
+      })
+
+      closeModalButtons.forEach(button => {
+        button.addEventListener('click', () => {
+          const modal = button.closest('.modal')
+          closeModal(modal)
+        })
+      })
+
+      function openModal(modal) {
+        if (modal == null) return
+        modal.classList.add('active')
+        overlay.classList.add('active')
+      }
+
+      function closeModal(modal) {
+        if (modal == null) return
+        modal.classList.remove('active')
+        overlay.classList.remove('active')
+      }
+  </script>
            <!--ALL-->
            <div class="box-b">
              <h2>List of Total Apprehension with Contact and No Contact</h2>
@@ -537,7 +605,65 @@ if ($resultCount) {
         </div>
         <div id="historyTab" class="modal-tabcontent">
            <div id="modalContent3"></div>
-            
+        <script>
+          //============MODAL TAB============
+    function openModalTab(evt, tabName) {
+        var i, modalTabcontent, modalTablinks;
+        modalTabcontent = document.getElementsByClassName("modal-tabcontent");
+        for (i = 0; i < modalTabcontent.length; i++) {
+            modalTabcontent[i].style.display = "none";
+        }
+        modalTablinks = document.getElementsByClassName("modal-tablinks");
+        for (i = 0; i < modalTablinks.length; i++) {
+            modalTablinks[i].className = modalTablinks[i].className.replace(" active", "");
+        }
+        document.getElementById(tabName).style.display = "block";
+        evt.currentTarget.className += " active";
+    }
+
+    document.addEventListener('DOMContentLoaded', function() {
+      const filterButtons = document.querySelectorAll('.filter-buttons button[data-filter]');
+      const filterInput = document.querySelector('input[name="filter"]');
+    
+      // Check if there's a saved filter state in local storage
+      const savedFilter = localStorage.getItem('activeFilter');
+    
+      // Set the active state based on the saved filter, if any
+      if (savedFilter) {
+        filterButtons.forEach(button => {
+          if (button.getAttribute('data-filter') === savedFilter) {
+            button.classList.add('active');
+          }
+        });
+    
+        // Apply the saved filter value to the filter input field
+        filterInput.value = savedFilter;
+      }
+    
+      // Add click event listeners to the filter buttons
+      filterButtons.forEach(button => {
+        button.addEventListener('click', function() {
+          const filterValue = this.getAttribute('data-filter');
+    
+          // Remove active state from all buttons
+          filterButtons.forEach(btn => btn.classList.remove('active'));
+    
+          // Add active state to the clicked button
+          this.classList.add('active');
+    
+          // Set the active filter in local storage
+          localStorage.setItem('activeFilter', filterValue);
+    
+          // Apply the filter value to the filter input field
+          filterInput.value = filterValue;
+    
+          // Submit the form
+          this.closest('form').submit();
+        });
+      });
+    });
+    
+        </script>    
         </div>
     </div>
 </div>
@@ -678,6 +804,7 @@ $(document).ready(function() {
       });
   });
   </script>
+ 
     </div>
     </div>
    </div>
@@ -743,13 +870,14 @@ $(document).ready(function() {
           });
       </script>
    <script>
-     function confirmLogout() {
-    <?php session_destroy(); ?>
+  function confirmLogout() {
     const confirmation = confirm("Are you sure you want to log out?");
     if (confirmation) {
-      window.location.href = "index.php";
+      window.location.href = "logout.php"; // Redirect to logout script on the server
     }
   }
+  </script>
+  <script>
     <?php include 'charts3.php'; ?>
     // Use the $chartData variable directly in your JavaScript code
     var chartData = <?php echo $chartData; ?>;

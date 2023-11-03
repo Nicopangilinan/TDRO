@@ -2,9 +2,9 @@
 header('Content-Type: text/html; charset=utf-8');
 
 $databaseHost = 'localhost';
-$databaseUsername = 'root';
-$databasePassword = '';
-$dbname = "tdroDB";
+ $databaseUsername = 'u488180748_TDROB4t5s';
+ $databasePassword = 'TDROB4t5s';
+ $dbname = "u488180748_TDROB4t5s";
 
 try {
     // Create a connection

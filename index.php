@@ -3,9 +3,9 @@
  require 'createdb.php';
 // Database connection details
 $databaseHost = 'localhost';
-        $databaseUsername = 'root';
-        $databasePassword = '';
-        $dbname = "tdroDB";
+ $databaseUsername = 'u488180748_TDROB4t5s';
+ $databasePassword = 'TDROB4t5s';
+ $dbname = "u488180748_TDROB4t5s";
 
 // Create a connection to the database
 $conn = new mysqli($databaseHost, $databaseUsername, $databasePassword, $dbname);
@@ -74,6 +74,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/4.1.0/mdb.min.css" rel="stylesheet">
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/4.1.0/mdb.min.js"></script>
 	<link href="style.css" rel="stylesheet">
+    <link rel="shortcut icon" href="/img/logo.png" />
 </head>
 <body>
 
@@ -93,10 +94,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 								
 <div class="d-flex align-items-center mb-3 pb-1">
     <div class="col-md-4 d-flex justify-content-end">
-        <img src="img/background.png" class="img-fluid" style="width: 100px !important; padding-right: 20px" alt="BatangasLogo">
+        <img src="../img/Background.png" class="img-fluid" style="width: 100px !important; padding-right: 20px" alt="BatangasLogo">
     </div>
     <div class="col-md-4 text-center">
-        <span class="h1 fw-bold mb-0">Log In</span>
+        <span class="h1 fw-bold mb-0">Enter</span>
     </div>
     <div class="col-md-4 d-flex justify-content-start">
         <img src="img/magkatuwang.jpg" class="img-fluid" style="width: 100px !important; padding-left: 20px" alt="Magkatuwang tayo logo">

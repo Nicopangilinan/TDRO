@@ -9,9 +9,9 @@ if (!isset($_SESSION['user_id'])) {
     exit();
 }
 $databaseHost = 'localhost';
-        $databaseUsername = 'root';
-        $databasePassword = '';
-        $dbname = "tdroDB";
+ $databaseUsername = 'u488180748_TDROB4t5s';
+ $databasePassword = 'TDROB4t5s';
+ $dbname = "u488180748_TDROB4t5s";
 
 // Connect to the newly created database
 $conn = new mysqli($databaseHost, $databaseUsername, $databasePassword, $dbname);
@@ -26,10 +26,10 @@ if ($conn->connect_error) {
     $result2 = $conn->query($sql)
     ?>
 <?php
- $databaseHost = 'localhost';
- $databaseUsername = 'root';
- $databasePassword = '';
- $dbname = "tdroDB";
+$databaseHost = 'localhost';
+ $databaseUsername = 'u488180748_TDROB4t5s';
+ $databasePassword = 'TDROB4t5s';
+ $dbname = "u488180748_TDROB4t5s";
 
 // Connect to the newly created database
 $conn = new mysqli($databaseHost, $databaseUsername, $databasePassword, $dbname);
@@ -43,10 +43,10 @@ if ($conn->connect_error) {
     $result = $conn->query($sql)
 ?>
 <?php
- $databaseHost = 'localhost';
- $databaseUsername = 'root';
- $databasePassword = '';
- $dbname = "tdroDB";
+$databaseHost = 'localhost';
+ $databaseUsername = 'u488180748_TDROB4t5s';
+ $databasePassword = 'TDROB4t5s';
+ $dbname = "u488180748_TDROB4t5s";
     
 $conn = new mysqli($databaseHost, $databaseUsername, $databasePassword, $dbname);
 
@@ -59,9 +59,9 @@ $sqlInt = "SELECT * FROM data_info";
 ?>
 <?php
 $databaseHost = 'localhost';
-$databaseUsername = 'root';
-$databasePassword = '';
-$dbname = "tdroDB";
+$databaseUsername = 'u488180748_TDROB4t5s';
+$databasePassword = 'TDROB4t5s';
+$dbname = "u488180748_TDROB4t5s";
 
 $conn = new mysqli($databaseHost, $databaseUsername, $databasePassword, $dbname);
 
@@ -75,9 +75,9 @@ $sqlInfo = "SELECT * FROM data_info WHERE Name != 'unattended'";
 <!--UNATTENDED-->
 <?php
 $databaseHost = 'localhost';
-$databaseUsername = 'root';
-$databasePassword = '';
-$dbname = "tdroDB";
+ $databaseUsername = 'u488180748_TDROB4t5s';
+ $databasePassword = 'TDROB4t5s';
+ $dbname = "u488180748_TDROB4t5s";
 
 $conn = new mysqli($databaseHost, $databaseUsername, $databasePassword, $dbname);
 
@@ -91,9 +91,9 @@ $sqlInfoS = "SELECT * FROM data_info WHERE Name = 'unattended'";
 <!--OR NUMBER-->
 <?php
 $databaseHost = 'localhost';
-$databaseUsername = 'root';
-$databasePassword = '';
-$dbname = "tdroDB";
+ $databaseUsername = 'u488180748_TDROB4t5s';
+ $databasePassword = 'TDROB4t5s';
+ $dbname = "u488180748_TDROB4t5s";
 
 $conn = new mysqli($databaseHost, $databaseUsername, $databasePassword, $dbname);
 
@@ -106,10 +106,10 @@ $sqlInfoO = "SELECT * FROM data_info WHERE ORNo = NULL";
 ?>
 <!--COUNTER WITH CONTACT-->
 <?php
- $databaseHost = 'localhost';
- $databaseUsername = 'root';
- $databasePassword = '';
- $dbname = "tdroDB";
+$databaseHost = 'localhost';
+ $databaseUsername = 'u488180748_TDROB4t5s';
+ $databasePassword = 'TDROB4t5s';
+ $dbname = "u488180748_TDROB4t5s";
 
 $conn = new mysqli($databaseHost, $databaseUsername, $databasePassword, $dbname);
 
@@ -129,10 +129,10 @@ if ($resultCount) {
 ?>
 <!--COUNTER WITH NO CONTACT-->
 <?php
- $databaseHost = 'localhost';
- $databaseUsername = 'root';
- $databasePassword = '';
- $dbname = "tdroDB";
+$databaseHost = 'localhost';
+ $databaseUsername = 'u488180748_TDROB4t5s';
+ $databasePassword = 'TDROB4t5s';
+ $dbname = "u488180748_TDROB4t5s";
 
 $conn = new mysqli($databaseHost, $databaseUsername, $databasePassword, $dbname);
 
@@ -152,10 +152,10 @@ if ($resultCount) {
 ?>
 <!--COUNTER MATERLIST-->
 <?php
- $databaseHost = 'localhost';
- $databaseUsername = 'root';
- $databasePassword = '';
- $dbname = "tdroDB";
+$databaseHost = 'localhost';
+ $databaseUsername = 'u488180748_TDROB4t5s';
+ $databasePassword = 'TDROB4t5s';
+ $dbname = "u488180748_TDROB4t5s";
 
 $conn = new mysqli($databaseHost, $databaseUsername, $databasePassword, $dbname);
 
@@ -188,6 +188,7 @@ if ($resultCount) {
           display: none;
       }
     </style>
+    <link rel="shortcut icon" href="/img/logo.png" />
   </head>
   <body>
     <div class="banner">

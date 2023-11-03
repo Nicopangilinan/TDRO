@@ -2,10 +2,9 @@
 header('Content-Type: application/json');
 
 $databaseHost = 'localhost';
-$databaseUsername = 'root';
-$databasePassword = '';
-$dbname = "tdroDB";
-
+ $databaseUsername = 'u488180748_TDROB4t5s';
+ $databasePassword = 'TDROB4t5s';
+ $dbname = "u488180748_TDROB4t5s";
 try {
     if (isset($_POST['id'])) {
         $rowID = $_POST['id'];

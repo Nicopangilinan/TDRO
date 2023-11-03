@@ -1,8 +1,8 @@
 <?php
 $databaseHost = 'localhost';
-$databaseUsername = 'root';
-$databasePassword = '';
-$dbname = "tdroDB";
+$databaseUsername = 'u488180748_TDROB4t5s';
+$databasePassword = 'TDROB4t5s';
+$dbname = "u488180748_TDROB4t5s";
 
 // Create a connection
 $conn = new mysqli($databaseHost, $databaseUsername, $databasePassword);
