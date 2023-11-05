@@ -173,6 +173,42 @@ if ($resultCount) {
     $totalMaster = 0;
 }
 ?>
+<?php
+$databaseHost = 'localhost';
+$databaseUsername = 'u488180748_TDROB4t5s';
+$databasePassword = 'TDROB4t5s';
+$dbname = "u488180748_TDROB4t5s";
+// Create a database connection
+$conn = new mysqli($databaseHost, $databaseUsername, $databasePassword, $dbname);
+
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
+
+$searchTerm = isset($_POST['search']) ? $_POST['search'] : '';
+$filter = isset($_POST['filter']) ? $_POST['filter'] : 'all';
+
+if (!empty($searchTerm)) {
+    $sqlInt = "SELECT * FROM data_info WHERE (TicketNo LIKE '%$searchTerm%' OR Name LIKE '%$searchTerm%')";
+} else {
+    switch ($filter) {
+        case 'settled':
+            $sqlInt = "SELECT * FROM data_info WHERE Status = 'Settled'";
+            break;
+        case 'unsettled':
+            $sqlInt = "SELECT * FROM data_info WHERE Status = 'Unsettled'";
+            break;
+        case 'casefiles':
+            $sqlInt = "SELECT * FROM data_info WHERE Status = 'Unsettled' AND DATE_ADD(Date, INTERVAL 2 WEEK) <= NOW()";
+            break;
+        default:
+            $sqlInt = "SELECT * FROM data_info";
+            break;
+    }
+}
+
+$resultInt = $conn->query($sqlInt);
+?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -555,58 +591,263 @@ if ($resultCount) {
     </div>
          <div class="tab-pane" id="master-list">
            <!-- master-list CONTENT -->
-           <h1>TDRO Master List</h1>
-   <div class="box-b" style=" height: 600px;">
-     <div class="search-bar">
-       <input type="text" class="search-input" id="searchInput4" placeholder="Search by Name or #">
-     </div>
-     <div class="filter-buttons">
-       <button id="showAll"><i aria-hidden="true"></i> Show All</button>
-       <button id="successList"><i aria-hidden="true"></i> Settled List</button>
-       <button id="failedList"><i aria-hidden="true"></i> Unsettled List</button>
-     </div>
-       <div id="searchResults4">
-       <?php if ($resultInt->num_rows > 0) : ?>
-        <table class="content-table">
-            <thead>
-                <tr>
-                        <th>Ticket No.</th>
-                        <th>Name</th>
-                        <th>PlateNumber</th>
-                        <th>OR Number</th>
-                        <th>OR Date</th>
-                        <th>Status</th>
-                </tr>
-            </thead>
-            <tbody id="violatorTableBody">
-                <?php while ($row = $resultInt->fetch_assoc()) : ?>
-                    <tr data-row-id="<?= $row['id'] ?>">
-                             <td><?= $row['TicketNo'] ?></td>
-                            <td><?= $row['Name'] ?></td>
-                            <td><?= $row['PlateNumber'] ?></td>
-                            <td><?= $row['ORNo'] ?></td>
-                            <td><?= $row['ORDate'] ?></td>
-                            <td><?= $row['Status'] ?></td>
-                    </tr>
-                <?php endwhile; ?>
-            </tbody>
-        </table>
-    <?php else : ?>
-        <p>No Violators Found</p>
-    <?php endif; ?>
-    </div>
-    </div>
-   </div>
-          <!-- Hidden modal for violator details -->
-          <div id="myModal" class="modal2">
-            <div class="modal-content2">
-              <span class="close2" id="closeModal">&times;</span>
-              <h1 style="font-weight: bolder; color: #fff; font-size: 30px; margin-top: -50px">Violator's Details</h1><br>
-              <div id="modalContent2">
-                  
-                </div>
-              </div>
+           <div class="box-b" style="height: 600px;">
+  <div class="search-bar">
+    <form method="post" action="">
+      <input type="text" class="search-input" name="search" placeholder="Search by Name or #">
+      <button class="edit-button" type="submit">Search</button>
+    </form>
+  </div>
+  <div class="filter-buttons">
+    <form method="post" action="">
+      <button type="submit" name="filter" value="all"><i aria-hidden="true"></i> Show All</button>
+      <button type="submit" name="filter" value="settled"><i aria-hidden="true"></i> Settled List</button>
+      <button type="submit" name="filter" value="unsettled"><i aria-hidden="true"></i> Unsettled List</button>
+      <button type="submit" name="filter" value="casefiles"><i aria-hidden="true"></i> Case Files</button>
+    </form>
+  </div>
+  <div id="searchResults4">
+                <?php if ($resultInt->num_rows > 0) : ?>
+                  <div class="content-table">
+              <table >
+                  <thead>
+                          <th>Ticket No.</th>
+                          <th>Name</th>
+                          <th>PlateNumber</th>
+                          <th>OR Number</th>
+                          <th>OR Date</th>
+                          <th>Status</th>
+                      </tr>
+                  </thead>
+                  <tbody id="violatorTableBody">
+                      <?php while ($row = $resultInt->fetch_assoc()) : ?>
+                        <tr data-row-id="<?= $row['id'] ?>" data-license-number="<?= $row['LicenseNumber'] ?>">
+                              <td><?= $row['TicketNo'] ?></td>
+                              <td><?= $row['Name'] ?></td>
+                              <td><?= $row['PlateNumber'] ?></td>
+                              <td><?= $row['ORNo'] ?></td>
+                              <td><?= $row['ORDate'] ?></td>
+                              <td><?= $row['Status'] ?></td>
+                              <td>
+                                <button class="delete-button" data-row-id="<?= $row['id'] ?>">Delete</button>
+                            </td>
+                          </tr>
+                      <?php endwhile; ?>
+                  </tbody>
+              </table>
+              <?php else : ?>
+                  <p>No Violators Found</p>
+              <?php endif; ?>
           </div>
+          </div>
+      </div>
+        <!-- Hidden modal for violator details -->
+        <div id="myModal2" class="modal2">
+    <div class="modal-content2">
+        <span class="close2" id="closeModal">&times;</span>
+        <h1 style="font-weight: bolder; color: #fff; font-size: 30px; margin-top: -50px">Violator's Details</h1><br> 
+            <div id="modalContent2"></div>
+            <div id="modalContent"></div>
+        </div>
+        <script>
+          //============MODAL TAB============
+    function openModalTab(evt, tabName) {
+        var i, modalTabcontent, modalTablinks;
+        modalTabcontent = document.getElementsByClassName("modal-tabcontent");
+        for (i = 0; i < modalTabcontent.length; i++) {
+            modalTabcontent[i].style.display = "none";
+        }
+        modalTablinks = document.getElementsByClassName("modal-tablinks");
+        for (i = 0; i < modalTablinks.length; i++) {
+            modalTablinks[i].className = modalTablinks[i].className.replace(" active", "");
+        }
+        document.getElementById(tabName).style.display = "block";
+        evt.currentTarget.className += " active";
+    }
+
+    document.addEventListener('DOMContentLoaded', function() {
+      const filterButtons = document.querySelectorAll('.filter-buttons button[data-filter]');
+      const filterInput = document.querySelector('input[name="filter"]');
+    
+      // Check if there's a saved filter state in local storage
+      const savedFilter = localStorage.getItem('activeFilter');
+    
+      // Set the active state based on the saved filter, if any
+      if (savedFilter) {
+        filterButtons.forEach(button => {
+          if (button.getAttribute('data-filter') === savedFilter) {
+            button.classList.add('active');
+          }
+        });
+    
+        // Apply the saved filter value to the filter input field
+        filterInput.value = savedFilter;
+      }
+    
+      // Add click event listeners to the filter buttons
+      filterButtons.forEach(button => {
+        button.addEventListener('click', function() {
+          const filterValue = this.getAttribute('data-filter');
+    
+          // Remove active state from all buttons
+          filterButtons.forEach(btn => btn.classList.remove('active'));
+    
+          // Add active state to the clicked button
+          this.classList.add('active');
+    
+          // Set the active filter in local storage
+          localStorage.setItem('activeFilter', filterValue);
+    
+          // Apply the filter value to the filter input field
+          filterInput.value = filterValue;
+    
+          // Submit the form
+          this.closest('form').submit();
+        });
+      });
+    });
+    
+        </script>    
+        </div>
+    </div>
+</div>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script>
+    // Violator Modal 
+    console.log("Script is running");
+$(document).ready(function() {
+  var modal = $("#myModal");
+  var closeModal = $("#closeModal");
+
+  // Use event delegation to handle click events for dynamic rows
+  $('#violatorTableBody').on('click', 'tr', function () {
+    var rowId = $(this).data('row-id');
+    var license = $(this).data('license-number');
+    
+    console.log('LICENSE: ' + license);
+    console.log('Clicked row ID: ' + rowId );
+
+    // Make an AJAX request to fetch the entire row data
+    $.ajax({
+      type: "GET",
+      url: "test.php?id=" + rowId,
+      success: function (data) {
+        $("#modalContent2").html(data);
+        modal.css("display", "block");
+      }
+    });
+    $.ajax({
+      type: "GET",
+      url: "test2.php?license=" + license,
+      success: function (data) {
+        $("#modalContent3").html(data);
+        modal.css("display", "block");
+      }
+    });
+  });
+
+  
+});
+
+  </script>
+  <script>
+ $(document).ready(function () {
+    var modal = $("#myModal2");
+    var closeModal = $("#closeModal");
+
+    
+
+    // Handle the "Delete" button click
+    $('.delete-button').click(function () {
+        var rowId = $(this).data('row-id');
+
+        // Prompt the user for confirmation before deleting
+        if (confirm('Are you sure you want to delete this row?')) {
+            // User confirmed, proceed with the delete operation
+
+            // Perform the delete operation via AJAX
+            $.ajax({
+                type: "POST",
+                url: "delete.php",
+                data: { id: rowId, confirmed: 'true' }, // Add 'confirmed' parameter
+                success: function (response) {
+                    // Refresh the page after successful deletion
+                    location.reload();
+                }
+            });
+        }
+    });
+
+      $('#violatorTableBody tr').click(function () {
+          var rowId = $(this).data('row-id');
+          var modalContent = $("#modalContent");
+          modalContent.empty(); // Clear existing content
+
+          $.ajax({
+              type: "GET",
+              url: "test.php?id=" + rowId, // Update the URL to your PHP script
+              success: function (data) {
+                  modal.css("display", "block");
+
+                  var editButton = $("<button>Edit</button>").addClass("edit-button");
+                  var statusDropdown = $("<select><option value='Settled'>Settled</option><option value='Unsettled'>Unsettled</option></select>");
+
+                  editButton.click(function () {
+                      // Create input fields
+                      var licenseNumberInput = $("<input type='text' id='LicenseNumberInput' value='" + $("#LicenseNumber").text() + "'>");
+                      var orNoInput = $("<input type='text' id='ORNoInput' value='" + $("#ORNo").text() + "'>");
+                      var orDateInput = $("<input type='date' id='ORDateInput' value='" + $("#ORDate").text() + "'>");
+
+                      // Show the input fields
+                      modalContent.append("<p><strong>LicenseNumber:</strong></p>").append(licenseNumberInput);
+                      modalContent.append("<p><strong>ORNo:</strong></p>").append(orNoInput);
+                      modalContent.append("<p><strong>ORDate:</strong></p>").append(orDateInput);
+                      modalContent.append("<p><strong>Status:</strong></p>").append(statusDropdown);
+
+                      var saveButton = $("<button>Save</button>").addClass("edit-button");
+
+                      saveButton.click(function () {
+                          var editedLicenseNumber = $("#LicenseNumberInput").val();
+                          var editedORNo = $("#ORNoInput").val();
+                          var editedORDate = $("#ORDateInput").val();
+                          var selectedStatus = statusDropdown.val();
+
+                          $.ajax({
+                              type: "POST",
+                              url: "update.php",
+                              data: {
+                                  id: rowId,
+                                  LicenseNumber: editedLicenseNumber,
+                                  ORNo: editedORNo,
+                                  ORDate: editedORDate,
+                                  Status: selectedStatus
+                              },
+                              success: function (response) {
+                                  alert("Data updated successfully!");location.reload();
+                              }
+                          });
+                      });
+
+                      modalContent.append(saveButton);
+                  });
+
+                  // Show the "Edit" button in the modal
+                  modalContent.append(editButton);
+              }
+          });
+      });
+
+      closeModal.click(function () {
+          modal.css("display", "none");
+      });
+
+      $(window).click(function (e) {
+          if (e.target === modal[0]) {
+              modal.css("display", "none");
+          }
+      });
+  });
+  </script>
           <script>
   $(document).ready(function () {
     // Get a reference to the modal and the close button
@@ -626,6 +867,75 @@ if ($resultCount) {
     };
   });
 </script>
+<script>
+    //modal
+
+      const openModalButtons = document.querySelectorAll('[data-modal-target]');
+      const closeModalButtons = document.querySelectorAll('[data-close-button]');
+      const overlay = document.getElementById('overlay');
+
+      console.log(openModalButtons);
+
+      openModalButtons.forEach(button => {
+          button.addEventListener('click', () => {
+              const modal = document.querySelector(button.dataset.modalTarget);
+              openModal(modal);
+          });
+      });
+
+      closeModalButtons.forEach(button => {
+          button.addEventListener('click', () => {
+              const modal = button.closest('.modal');
+              closeModal(modal);
+          });
+      });
+
+      overlay.addEventListener('click', () => {
+          const modals = document.querySelectorAll('.modal.active');
+          modals.forEach(modal => {
+              closeModal(modal);
+          });
+      });
+
+      function openModal(modal) {
+          if (modal == null) return;
+          modal.classList.add('active');
+          overlay.classList.add('active');
+      }
+
+      function closeModal(modal) {
+          if (modal == null) return;
+          modal.classList.remove('active');
+          overlay.classList.remove('active');
+      }
+
+
+              overlay.addEventListener('click', () => {
+                const modals = document.querySelectorAll('.modal.active')
+                modals.forEach(modal => {
+                    closeModal(modal)
+        })
+      })
+
+      closeModalButtons.forEach(button => {
+        button.addEventListener('click', () => {
+          const modal = button.closest('.modal')
+          closeModal(modal)
+        })
+      })
+
+      function openModal(modal) {
+        if (modal == null) return
+        modal.classList.add('active')
+        overlay.classList.add('active')
+      }
+
+      function closeModal(modal) {
+        if (modal == null) return
+        modal.classList.remove('active')
+        overlay.classList.remove('active')
+      }
+  </script>
 
 </div>
      </div>
@@ -637,25 +947,7 @@ if ($resultCount) {
        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
        <script src="script.js"></script>
-       <script>
-  
-</script>
 
-<script>
-  // failed list button
-document.getElementById('failedList').addEventListener('click', function () {
-  // Send an AJAX request to filter_failed.php
-  searchResults4.innerHTML = '<p>Loading...</p>';
-  fetch('filter_failed.php')
-      .then(response => response.text())
-      .then(data => {
-          searchResults4.innerHTML = data;
-      })
-      .catch(error => {
-          console.error('Error:', error);
-      });
-});
-</script>
 
        <script>
 
@@ -696,8 +988,128 @@ document.addEventListener('DOMContentLoaded', function () {
         document.getElementById(tabId).style.display = 'block';
       });
     });
-    
-    
+  </script>
+    <script>
+    //Search Functionality With contact
+document.addEventListener('DOMContentLoaded', function () {
+  const searchInput = document.getElementById('searchInput1');
+  const searchResults = document.getElementById('searchResults');
+
+  searchInput.addEventListener('input', function () {
+      const searchTerm = searchInput.value.trim();
+
+      if (searchTerm !== '') {
+          // Send an AJAX request to search.php
+          searchResults.innerHTML = '<p>Loading...</p>';
+          fetch(`search.php?term=${searchTerm}`)
+              .then(response => response.text())
+              .then(data => {
+                  searchResults.innerHTML = data;
+              })
+              .catch(error => {
+                  console.error('Error:', error);
+              });
+      } else {
+          // When the input is empty, show the whole table
+          searchResults.innerHTML = ''; // Clear results
+          fetch('search.php') // Send an AJAX request without a search term
+              .then(response => response.text())
+              .then(data => {
+                  searchResults.innerHTML = data; // Display the whole table
+              })
+              .catch(error => {
+                  console.error('Error:', error);
+              });
+      }
+  });
+});
+// Search With No Contact
+document.addEventListener('DOMContentLoaded', function () {
+  const searchInput = document.getElementById('searchInput2');
+  const searchResults = document.getElementById('searchResults2');
+
+  searchInput.addEventListener('input', function () {
+      const searchTerm = searchInput.value.trim();
+
+      if (searchTerm !== '') {
+          // Send an AJAX request to search.php
+          searchResults.innerHTML = '<p>Loading...</p>';
+          fetch(`search2.php?term=${searchTerm}`)
+              .then(response => response.text())
+              .then(data => {
+                  searchResults.innerHTML = data;
+              })
+              .catch(error => {
+                  console.error('Error:', error);
+              });
+      } else {
+          // When the input is empty, show the whole table
+          searchResults.innerHTML = ''; // Clear results
+          fetch('search2.php') // Send an AJAX request without a search term
+              .then(response => response.text())
+              .then(data => {
+                  searchResults.innerHTML = data; // Display the whole table
+              })
+              .catch(error => {
+                  console.error('Error:', error);
+              });
+      }
+  });
+});
+// Search With & No Contact
+document.addEventListener('DOMContentLoaded', function () {
+  const searchInput = document.getElementById('searchInput3');
+  const searchResults = document.getElementById('searchResults3');
+
+  searchInput.addEventListener('input', function () {
+      const searchTerm = searchInput.value.trim();
+
+      if (searchTerm !== '') {
+          // Send an AJAX request to search.php
+          searchResults.innerHTML = '<p>Loading...</p>';
+          fetch(`search3.php?term=${searchTerm}`)
+              .then(response => response.text())
+              .then(data => {
+                  searchResults.innerHTML = data;
+              })
+              .catch(error => {
+                  console.error('Error:', error);
+              });
+      } else {
+          // When the input is empty, show the whole table
+          searchResults.innerHTML = ''; // Clear results
+          fetch('search3.php') // Send an AJAX request without a search term
+              .then(response => response.text())
+              .then(data => {
+                  searchResults.innerHTML = data; // Display the whole table
+              })
+              .catch(error => {
+                  console.error('Error:', error);
+              });
+      }
+  });
+});
+  </script>
+  <script>
+    const sidebar = document.querySelector(".sidebar");
+const sidebarClose = document.querySelector("#sidebar-close");
+const menu = document.querySelector(".menu-content");
+const menuItems = document.querySelectorAll(".submenu-item");
+const subMenuTitles = document.querySelectorAll(".submenu .menu-title");
+
+sidebarClose.addEventListener("click", () => sidebar.classList.toggle("close"));
+
+menuItems.forEach((item, index) => {
+  item.addEventListener("click", () => {
+    menu.classList.add("submenu-active");
+    item.classList.add("show-submenu");
+    menuItems.forEach((item2, index2) => {
+      if (index !== index2) {
+        item2.classList.remove("show-submenu");
+      }
+    });
+  });
+});
   </script>
 </body>
 </html>

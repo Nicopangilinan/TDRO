@@ -87,7 +87,7 @@ if (!empty($searchTerm)) {
             $sqlInt = "SELECT * FROM data_info WHERE Status = 'Unsettled'";
             break;
         case 'casefiles':
-            $sqlInt = "SELECT * FROM data_info WHERE Status = 'Unsettled' AND DATE_ADD(CreatedDate, INTERVAL 1 WEEK) <= NOW()";
+            $sqlInt = "SELECT * FROM data_info WHERE Status = 'Unsettled' AND DATE_ADD(Date, INTERVAL 2 WEEK) <= NOW()";
             break;
         default:
             $sqlInt = "SELECT * FROM data_info";
@@ -542,7 +542,7 @@ if ($resultCount) {
   <div class="search-bar">
     <form method="post" action="">
       <input type="text" class="search-input" name="search" placeholder="Search by Name or #">
-      <button class="edit-button                                                                                              " type="submit">Search</button>
+      <button class="edit-button" type="submit">Search</button>
     </form>
   </div>
   <div class="filter-buttons">
@@ -958,6 +958,128 @@ document.addEventListener('DOMContentLoaded', function () {
     });
     
     
+  </script>
+  <script>
+    //Search Functionality With contact
+document.addEventListener('DOMContentLoaded', function () {
+  const searchInput = document.getElementById('searchInput1');
+  const searchResults = document.getElementById('searchResults');
+
+  searchInput.addEventListener('input', function () {
+      const searchTerm = searchInput.value.trim();
+
+      if (searchTerm !== '') {
+          // Send an AJAX request to search.php
+          searchResults.innerHTML = '<p>Loading...</p>';
+          fetch(`search.php?term=${searchTerm}`)
+              .then(response => response.text())
+              .then(data => {
+                  searchResults.innerHTML = data;
+              })
+              .catch(error => {
+                  console.error('Error:', error);
+              });
+      } else {
+          // When the input is empty, show the whole table
+          searchResults.innerHTML = ''; // Clear results
+          fetch('search.php') // Send an AJAX request without a search term
+              .then(response => response.text())
+              .then(data => {
+                  searchResults.innerHTML = data; // Display the whole table
+              })
+              .catch(error => {
+                  console.error('Error:', error);
+              });
+      }
+  });
+});
+// Search With No Contact
+document.addEventListener('DOMContentLoaded', function () {
+  const searchInput = document.getElementById('searchInput2');
+  const searchResults = document.getElementById('searchResults2');
+
+  searchInput.addEventListener('input', function () {
+      const searchTerm = searchInput.value.trim();
+
+      if (searchTerm !== '') {
+          // Send an AJAX request to search.php
+          searchResults.innerHTML = '<p>Loading...</p>';
+          fetch(`search2.php?term=${searchTerm}`)
+              .then(response => response.text())
+              .then(data => {
+                  searchResults.innerHTML = data;
+              })
+              .catch(error => {
+                  console.error('Error:', error);
+              });
+      } else {
+          // When the input is empty, show the whole table
+          searchResults.innerHTML = ''; // Clear results
+          fetch('search2.php') // Send an AJAX request without a search term
+              .then(response => response.text())
+              .then(data => {
+                  searchResults.innerHTML = data; // Display the whole table
+              })
+              .catch(error => {
+                  console.error('Error:', error);
+              });
+      }
+  });
+});
+// Search With & No Contact
+document.addEventListener('DOMContentLoaded', function () {
+  const searchInput = document.getElementById('searchInput3');
+  const searchResults = document.getElementById('searchResults3');
+
+  searchInput.addEventListener('input', function () {
+      const searchTerm = searchInput.value.trim();
+
+      if (searchTerm !== '') {
+          // Send an AJAX request to search.php
+          searchResults.innerHTML = '<p>Loading...</p>';
+          fetch(`search3.php?term=${searchTerm}`)
+              .then(response => response.text())
+              .then(data => {
+                  searchResults.innerHTML = data;
+              })
+              .catch(error => {
+                  console.error('Error:', error);
+              });
+      } else {
+          // When the input is empty, show the whole table
+          searchResults.innerHTML = ''; // Clear results
+          fetch('search3.php') // Send an AJAX request without a search term
+              .then(response => response.text())
+              .then(data => {
+                  searchResults.innerHTML = data; // Display the whole table
+              })
+              .catch(error => {
+                  console.error('Error:', error);
+              });
+      }
+  });
+});
+  </script>
+  <script>
+    const sidebar = document.querySelector(".sidebar");
+const sidebarClose = document.querySelector("#sidebar-close");
+const menu = document.querySelector(".menu-content");
+const menuItems = document.querySelectorAll(".submenu-item");
+const subMenuTitles = document.querySelectorAll(".submenu .menu-title");
+
+sidebarClose.addEventListener("click", () => sidebar.classList.toggle("close"));
+
+menuItems.forEach((item, index) => {
+  item.addEventListener("click", () => {
+    menu.classList.add("submenu-active");
+    item.classList.add("show-submenu");
+    menuItems.forEach((item2, index2) => {
+      if (index !== index2) {
+        item2.classList.remove("show-submenu");
+      }
+    });
+  });
+});
   </script>
 </body>
 </html>
