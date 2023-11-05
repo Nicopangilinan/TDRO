@@ -564,7 +564,6 @@ if ($resultCount) {
        <button id="showAll"><i aria-hidden="true"></i> Show All</button>
        <button id="successList"><i aria-hidden="true"></i> Settled List</button>
        <button id="failedList"><i aria-hidden="true"></i> Unsettled List</button>
-       <button id="failedList"><i aria-hidden="true"></i> Case Files</button>
      </div>
        <div id="searchResults4">
        <?php if ($resultInt->num_rows > 0) : ?>
@@ -641,6 +640,23 @@ if ($resultCount) {
        <script>
   
 </script>
+
+<script>
+  // failed list button
+document.getElementById('failedList').addEventListener('click', function () {
+  // Send an AJAX request to filter_failed.php
+  searchResults4.innerHTML = '<p>Loading...</p>';
+  fetch('filter_failed.php')
+      .then(response => response.text())
+      .then(data => {
+          searchResults4.innerHTML = data;
+      })
+      .catch(error => {
+          console.error('Error:', error);
+      });
+});
+</script>
+
        <script>
 
 document.addEventListener('DOMContentLoaded', function () {

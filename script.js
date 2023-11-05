@@ -178,24 +178,12 @@ $("#paymentFilterForm").submit(function (e) {
       }
   });
 });
-// failed list button
-$("#failedList").submit(function (e) {
-  e.preventDefault();
-  var formData = $(this).serialize();
-  
-  $.ajax({
-      type: "POST",
-      url: "ilter_failed.php", // Change to the correct URL
-      data: formData,
-      success: function (response) {
-          $("#violatorTableBody").html(response);
-      }
-  });
-});
+
+
 //Success List button
 document.getElementById('successList').addEventListener('click', function () {
   // Send an AJAX request to filter_success.php
-  searchResults.innerHTML = '<p>Loading...</p>';
+  searchResults4.innerHTML = '<p>Loading...</p>';
   fetch('filter_success.php')
       .then(response => response.text())
       .then(data => {

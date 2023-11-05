@@ -10,26 +10,28 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-$sqlSuccessList = "SELECT * FROM data_info WHERE Status = 'Unsettled'";
-$resultSuccessList = $conn->query($sqlSuccessList);
+$sqlFailedList = "SELECT * FROM data_info WHERE Status = 'Unsettled'";
+$resultFailedList = $conn->query($sqlFailedList);
 ?>
 
-<?php if ($resultSuccessList->num_rows > 0) : ?>
+<?php if ($resultFailedList->num_rows > 0) : ?>
     <table class="content-table">
         <thead>
-            <tr>
+        <tr>
                 <th>Ticket No.</th>
                 <th>Name</th>
+                <th>PlateNumber</th>
                 <th>OR Number</th>
                 <th>OR Date</th>
                 <th>Status</th>
-            </tr>
+                </tr>
         </thead>
         <tbody>
-            <?php while ($row = $resultSuccessList->fetch_assoc()) : ?>
-                <tr>
+            <?php while ($row = $resultFailedList->fetch_assoc()) : ?>
+                <tr data-row-id="<?= $row['id'] ?>">
                     <td><?= $row['TicketNo'] ?></td>
                     <td><?= $row['Name'] ?></td>
+                    <td><?= $row['PlateNumber'] ?></td>
                     <td><?= $row['ORNo'] ?></td>
                     <td><?= $row['ORDate'] ?></td>
                     <td><?= $row['Status'] ?></td>
@@ -38,5 +40,5 @@ $resultSuccessList = $conn->query($sqlSuccessList);
         </tbody>
     </table>
 <?php else : ?>
-    <p>No Success Records Found</p>
+    <p>No Failed Records Found</p>
 <?php endif; ?>
