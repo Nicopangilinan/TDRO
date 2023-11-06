@@ -11,7 +11,8 @@ try {
         $rowID = $_POST['id'];
 
         // Check if the user has confirmed the update
-        if (isset($_POST['LicenseNumber'], $_POST['ORNo'], $_POST['ORDate'], $_POST['Status'])) {
+        if (isset($_POST['Name'], $_POST['LicenseNumber'], $_POST['ORNo'], $_POST['ORDate'], $_POST['Status'])) {
+            $editedName = $_POST['Name'];
             $editedLicenseNumber = $_POST['LicenseNumber'];
             $editedORNo = $_POST['ORNo'];
             $editedORDate = $_POST['ORDate'];
@@ -26,9 +27,9 @@ try {
             }
 
             // Prepare and execute an SQL update query
-            $query = "UPDATE data_info SET LicenseNumber = ?, ORNo = ?, ORDate = ?, Status = ? WHERE id = ?";
+            $query = "UPDATE data_info SET Name = ?, LicenseNumber = ?, ORNo = ?, ORDate = ?, Status = ? WHERE id = ?";
             $stmt = $conn->prepare($query);
-            $stmt->bind_param("ssssi", $editedLicenseNumber, $editedORNo, $editedORDate, $selectedStatus, $rowID);
+            $stmt->bind_param("sssssi", $editedName, $editedLicenseNumber, $editedORNo, $editedORDate, $selectedStatus, $rowID);
 
             if ($stmt->execute()) {
                 // Update was successful

@@ -120,12 +120,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 </div>
 
 <div class="d-flex justify-content-around align-items-center mb-4">
-										
-<!-- Checkbox -->
-<div class="form-check">
-<input class="form-check-input" type="checkbox" value="" id="form1Example3" unchecked />
-<label class="form-check-label" for="form1Example3"> Remember Me </label>
-</div>
 </div>
 
 <!-- Submit button -->

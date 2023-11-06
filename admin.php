@@ -734,64 +734,71 @@ $(document).ready(function() {
         }
     });
 
-      $('#violatorTableBody tr').click(function () {
-          var rowId = $(this).data('row-id');
-          var modalContent = $("#modalContent");
-          modalContent.empty(); // Clear existing content
+    $('#violatorTableBody tr').click(function () {
+    var rowId = $(this).data('row-id');
+    var modalContent = $("#modalContent");
+    modalContent.empty(); // Clear existing content
 
-          $.ajax({
-              type: "GET",
-              url: "test.php?id=" + rowId, // Update the URL to your PHP script
-              success: function (data) {
-                  modal.css("display", "block");
+    $.ajax({
+        type: "GET",
+        url: "test.php?id=" + rowId, // Update the URL to your PHP script
+        success: function (data) {
+            modal.css("display", "block");
 
-                  var editButton = $("<button>Edit</button>").addClass("edit-button");
-                  var statusDropdown = $("<select><option value='Settled'>Settled</option><option value='Unsettled'>Unsettled</option></select>");
+            var editButton = $("<button>Edit</button>").addClass("edit-button");
+            var statusDropdown = $("<select><option value='Settled'>Settled</option><option value='Unsettled'>Unsettled</option></select>");
 
-                  editButton.click(function () {
-                      // Create input fields
-                      var licenseNumberInput = $("<input type='text' id='LicenseNumberInput' value='" + $("#LicenseNumber").text() + "'>");
-                      var orNoInput = $("<input type='text' id='ORNoInput' value='" + $("#ORNo").text() + "'>");
-                      var orDateInput = $("<input type='date' id='ORDateInput' value='" + $("#ORDate").text() + "'>");
+            editButton.click(function () {
+                // Create input fields
+                var nameInput = $("<input type='text' id='NameInput' value='" + $("#Name").text() + "'>");
+                var licenseNumberInput = $("<input type='text' id='LicenseNumberInput' value='" + $("#LicenseNumber").text() + "'>");
+                var orNoInput = $("<input type='text' id='ORNoInput' value='" + $("#ORNo").text() + "'>");
+                var orDateInput = $("<input type='date' id='ORDateInput' value='" + $("#ORDate").text() + "'>");
 
-                      // Show the input fields
-                      modalContent.append("<p><strong>LicenseNumber:</strong></p>").append(licenseNumberInput);
-                      modalContent.append("<p><strong>ORNo:</strong></p>").append(orNoInput);
-                      modalContent.append("<p><strong>ORDate:</strong></p>").append(orDateInput);
-                      modalContent.append("<p><strong>Status:</strong></p>").append(statusDropdown);
+                // Show the input fields
+                modalContent.append("<p><strong>Name:</strong></p>").append(nameInput);
+                modalContent.append("<p><strong>LicenseNumber:</strong></p>").append(licenseNumberInput);
+                modalContent.append("<p><strong>ORNo:</strong></p>").append(orNoInput);
+                modalContent.append("<p><strong>ORDate:</strong></p>").append(orDateInput);
+                modalContent.append("<p><strong>Status:</strong></p>").append(statusDropdown);
 
-                      var saveButton = $("<button>Save</button>").addClass("edit-button");
+                var saveButton = $("<button>Save</button>").addClass("edit-button");
 
-                      saveButton.click(function () {
-                          var editedLicenseNumber = $("#LicenseNumberInput").val();
-                          var editedORNo = $("#ORNoInput").val();
-                          var editedORDate = $("#ORDateInput").val();
-                          var selectedStatus = statusDropdown.val();
+                saveButton.click(function () {
+                    var editedName = $("#NameInput").val();
+                    var editedLicenseNumber = $("#LicenseNumberInput").val();
+                    var editedORNo = $("#ORNoInput").val();
+                    var editedORDate = $("#ORDateInput").val();
+                    var selectedStatus = statusDropdown.val();
 
-                          $.ajax({
-                              type: "POST",
-                              url: "update.php",
-                              data: {
-                                  id: rowId,
-                                  LicenseNumber: editedLicenseNumber,
-                                  ORNo: editedORNo,
-                                  ORDate: editedORDate,
-                                  Status: selectedStatus
-                              },
-                              success: function (response) {
-                                  alert("Data updated successfully!");location.reload();
-                              }
-                          });
-                      });
+                    $.ajax({
+                        type: "POST",
+                        url: "update.php",
+                        data: {
+                            id: rowId,
+                            Name: editedName,
+                            LicenseNumber: editedLicenseNumber,
+                            ORNo: editedORNo,
+                            ORDate: editedORDate,
+                            Status: selectedStatus
+                        },
+                        success: function (response) {
+                            alert("Data updated successfully!");
+                            location.reload();
+                        }
+                    });
+                });
 
-                      modalContent.append(saveButton);
-                  });
+                // Append the Save button
+                modalContent.append(saveButton);
+            });
 
-                  // Show the "Edit" button in the modal
-                  modalContent.append(editButton);
-              }
-          });
-      });
+            // Append the Edit button
+            modalContent.append(editButton);
+        }
+    });
+});
+
 
       closeModal.click(function () {
           modal.css("display", "none");
