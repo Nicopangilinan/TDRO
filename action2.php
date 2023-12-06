@@ -1,10 +1,10 @@
 <?php 
 		session_start(); // creates session
 		$databaseHost = 'localhost';
-		$databaseUsername = 'u488180748_TDROB4t5s';
-		$databasePassword = 'TDROB4t5s';
-		$dbname = "u488180748_TDROB4t5s";
-    
+	$databaseUsername = 'u488180748_TDROB4t5s';
+	$databasePassword = 'TDROB4t5s';
+	$dbname = "u488180748_TDROB4t5s";
+		
         // Connect to the webapp_db database
         $conn = new mysqli($databaseHost, $databaseUsername, $databasePassword, $dbname);
     

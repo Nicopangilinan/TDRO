@@ -1,11 +1,11 @@
-
 <?php
  require 'createdb.php';
 // Database connection details
 $databaseHost = 'localhost';
- $databaseUsername = 'u488180748_TDROB4t5s';
- $databasePassword = 'TDROB4t5s';
- $dbname = "u488180748_TDROB4t5s";
+$databaseUsername = 'u488180748_TDROB4t5s';
+$databasePassword = 'TDROB4t5s';
+$dbname = "u488180748_TDROB4t5s";
+
 
 // Create a connection to the database
 $conn = new mysqli($databaseHost, $databaseUsername, $databasePassword, $dbname);
@@ -19,9 +19,30 @@ if ($conn->connect_error) {
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $email = $_POST["username"];
     $password = $_POST["password"];
+    $recaptchaResponse = $_POST["g-recaptcha-response"];
 
-        // You should perform proper validation and sanitization here
+    // Verify reCAPTCHA
+    $recaptchaSecretKey = "6Lf6r8MoAAAAAMqOMUNzyQ--QoeMTyeUcSeBHFCO";
+    $recaptchaVerifyUrl = "https://www.google.com/recaptcha/api/siteverify";
+        $recaptchaVerifyData = [
+            'secret' => $recaptchaSecretKey,
+            'response' => $recaptchaResponse,
+        ];
+        
+        $recaptchaVerifyOptions = [
+            'http' => [
+                'header' => "Content-type: application/x-www-form-urlencoded\r\n",
+                'method' => 'POST',
+                'content' => http_build_query($recaptchaVerifyData),
+            ],
+        ];
+        
+        $recaptchaVerifyContext = stream_context_create($recaptchaVerifyOptions);
+        $recaptchaVerifyResult = file_get_contents($recaptchaVerifyUrl, false, $recaptchaVerifyContext);
+        
+    $recaptchaVerifyData = json_decode($recaptchaVerifyResult);
 
+    if ($recaptchaVerifyData->success) {
         $sql = "SELECT user_id FROM officer WHERE username = ? AND password = ?";
         $stmt = $conn->prepare($sql);
         $stmt->bind_param("ss", $email, $password);
@@ -38,7 +59,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             echo '<script>alert("Officer Login successful. Click OK to proceed to the home page.");
                   window.location.href = "officer.php";</script>';
             exit();
-        }else{
+        }
+        else{
 
         $sql = "SELECT user_id FROM admin WHERE username = ? AND password = ?";
     $stmt = $conn->prepare($sql);
@@ -60,7 +82,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         echo '<script>alert("Invalid email or password.");</script>';
     }
 }
+    } else {
+        // reCAPTCHA verification failed, display an error
+        echo '<script>alert("reCAPTCHA verification failed.");</script>';
+    }
 }
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -73,8 +100,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&amp;display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/4.1.0/mdb.min.css" rel="stylesheet">
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/4.1.0/mdb.min.js"></script>
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
 	<link href="style.css" rel="stylesheet">
     <link rel="shortcut icon" href="/img/logo.png" />
+
 </head>
 <body>
 
@@ -94,7 +123,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 								
 <div class="d-flex align-items-center mb-3 pb-1">
     <div class="col-md-4 d-flex justify-content-end">
-        <img src="../img/Background.png" class="img-fluid" style="width: 100px !important; padding-right: 20px" alt="BatangasLogo">
+        <img src="img/Background.png" class="img-fluid" style="width: 100px !important; padding-right: 20px" alt="BatangasLogo">
     </div>
     <div class="col-md-4 text-center">
         <span class="h1 fw-bold mb-0">Log In</span>
@@ -119,7 +148,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <label class="form-label" for="password">Password</label>
 </div>
 
+<div class="g-recaptcha" style="margin: auto; width: 55%; " data-sitekey="6Lf6r8MoAAAAALP1tP3pRrAbie3dWG1iRexIkK-a"></div>
+
 <div class="d-flex justify-content-around align-items-center mb-4">
+										
+
 </div>
 
 <!-- Submit button -->
@@ -127,15 +160,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 </button>
 
 
+<button class="btn btn-primary btn-lg btn-block" type="button" onclick="gotoPage(event)" style="background-color: #1054d4"> Check Violation (For Drivers) </button>		
 <div class="divider d-flex align-items-center my-4">
 <a href="#!" class="small text-muted">Copyright © 2023 Transportation Development Regulatory Office. All Rights Reserved </a>
 </form>
+
+
 </div>
 									
 
-</form>
 </div>
-</div>			
+</div>	
+
 </div>
 </div>
 </div>
@@ -144,5 +180,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 </body>
 </body>
+<script>
+  function gotoPage(event) {
+    // Redirect to your PHP file
+    window.location.href = 'user.php';
+    event.preventDefault();
+
+    console.log("lol");
+  }
+</script>
 <grammarly-desktop-integration data-grammarly-shadow-root="true"></grammarly-desktop-integration>
 </html>

@@ -9,9 +9,9 @@ if (!isset($_SESSION['user_id'])) {
     exit();
 }
 $databaseHost = 'localhost';
- $databaseUsername = 'u488180748_TDROB4t5s';
- $databasePassword = 'TDROB4t5s';
- $dbname = "u488180748_TDROB4t5s";
+$databaseUsername = 'u488180748_TDROB4t5s';
+$databasePassword = 'TDROB4t5s';
+$dbname = "u488180748_TDROB4t5s";
 
 // Connect to the newly created database
 $conn = new mysqli($databaseHost, $databaseUsername, $databasePassword, $dbname);
@@ -326,6 +326,7 @@ if ($resultCount) {
                 </div>
                 <div id="searchResults">
                 <?php if ($resultInfo->num_rows > 0) : ?>
+      <div class="content-table-container">
         <table class="content-table">
             <thead>
                 <tr>
@@ -346,6 +347,7 @@ if ($resultCount) {
                 <?php endwhile; ?>
             </tbody>
         </table>
+      </div>
     <?php else : ?>
         <p>No Violator Found</p>
     <?php endif; ?>
@@ -374,6 +376,7 @@ if ($resultCount) {
                 </div>
                 <div id="searchResults2">
                 <?php if ($resultInfoS->num_rows > 0) : ?>
+        <div class="content-table-container">
         <table class="content-table">
             <thead>
                 <tr>
@@ -394,6 +397,7 @@ if ($resultCount) {
                 <?php endwhile; ?>
             </tbody>
         </table>
+                </div>
     <?php else : ?>
         <p>No Violator Found</p>
     <?php endif; ?>
@@ -477,10 +481,11 @@ if ($resultCount) {
            <div class="box-b">
              <h2>List of Total Apprehension with Contact and No Contact</h2>
              <div class="search-bar">
-             <input type="text" id="searchInput3" placeholder="Search by Name or #">
+             <input type="text" class="search-input" id="searchInput3" placeholder="Search by Name or #">
            </div>
            <div id="searchResults3">
            <?php if ($result->num_rows > 0) : ?>
+            <div class="content-table-container">
         <table class="content-table">
             <thead>
                 <tr>
@@ -503,6 +508,7 @@ if ($resultCount) {
                 <?php endwhile; ?>
             </tbody>
         </table>
+                </div>
     <?php else : ?>
         <p>No Violator Found</p>
     <?php endif; ?>
@@ -540,13 +546,11 @@ if ($resultCount) {
            <!-- master-list CONTENT -->
            <div class="box-b" style="height: 600px;">
   <div class="search-bar">
-    <form method="post" action="">
+    <form class="form2" method="post" action="">
       <input type="text" class="search-input" name="search" placeholder="Search by Name or #">
       <button class="edit-button" type="submit">Search</button>
-    </form>
   </div>
   <div class="filter-buttons">
-    <form method="post" action="">
       <button type="submit" name="filter" value="all"><i aria-hidden="true"></i> Show All</button>
       <button type="submit" name="filter" value="settled"><i aria-hidden="true"></i> Settled List</button>
       <button type="submit" name="filter" value="unsettled"><i aria-hidden="true"></i> Unsettled List</button>
@@ -555,6 +559,7 @@ if ($resultCount) {
   </div>
   <div id="searchResults4">
                 <?php if ($resultInt->num_rows > 0) : ?>
+                  <div class="content-table-container">
                   <div class="content-table">
               <table >
                   <thead>
@@ -575,9 +580,6 @@ if ($resultCount) {
                               <td><?= $row['ORNo'] ?></td>
                               <td><?= $row['ORDate'] ?></td>
                               <td><?= $row['Status'] ?></td>
-                              <td>
-                                <button class="delete-button" data-row-id="<?= $row['id'] ?>">Delete</button>
-                            </td>
                           </tr>
                       <?php endwhile; ?>
                   </tbody>
@@ -586,6 +588,7 @@ if ($resultCount) {
                   <p>No Violators Found</p>
               <?php endif; ?>
           </div>
+              </div>
           </div>
       </div>
         <!-- Hidden modal for violator details -->
@@ -756,11 +759,11 @@ $(document).ready(function() {
                 var orDateInput = $("<input type='date' id='ORDateInput' value='" + $("#ORDate").text() + "'>");
 
                 // Show the input fields
-                modalContent.append("<p><strong>Name:</strong></p>").append(nameInput);
-                modalContent.append("<p><strong>LicenseNumber:</strong></p>").append(licenseNumberInput);
-                modalContent.append("<p><strong>ORNo:</strong></p>").append(orNoInput);
-                modalContent.append("<p><strong>ORDate:</strong></p>").append(orDateInput);
-                modalContent.append("<p><strong>Status:</strong></p>").append(statusDropdown);
+                modalContent.append("<p><strong>Name:</strong></p>").append(nameInput.attr('style', 'border: 2px solid black;'));
+                modalContent.append("<p><strong>LicenseNumber:</strong></p>").append(licenseNumberInput.attr('style', 'border: 2px solid black;'));
+                modalContent.append("<p><strong>ORNo:</strong></p>").append(orNoInput.attr('style', 'border: 2px solid black;'));
+                modalContent.append("<p><strong>ORDate:</strong></p>").append(orDateInput.attr('style', 'border: 2px solid black;'));
+                modalContent.append("<p><strong>Status:</strong></p>").append(statusDropdown.attr('style', 'border: 2px solid black;'));
 
                 var saveButton = $("<button>Save</button>").addClass("edit-button");
 
@@ -912,7 +915,7 @@ $(document).ready(function() {
         options: {
             scales: {
                 y: {
-                    beginAtZero: true
+                    beginAtZero: false
                 }
             }
         }

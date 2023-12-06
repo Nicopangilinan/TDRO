@@ -11,7 +11,7 @@
   position: fixed;
   height: 100%;
   width: 260px;
-  background: #0c2727;
+  background: #9ed2be;
   padding: 15px;
   z-index: 99;
 }
@@ -41,13 +41,13 @@
     display: flex;
   }
   .sidebar a {
-  color: #fff;
+  color: #000;
   text-decoration: none;
 }
   .logout-button {
     background-color: transparent;
     font-size: 15px;
-    color: #fff;
+    color: #000;
     border: none;
     padding: 20px 55px;
     border-radius: 4px;
@@ -93,22 +93,23 @@
   display: inline-block;
   width: 100%;
   border-radius: 12px;
+  cursor: pointer;
 }
 .tab.active{
-  background: rgba(228, 221, 221, 0.1);
+  background: #7c9694;
   padding: 0px;
   gap: 5px;
   display: inline-block;
   width: 100%;
   border-radius: 12px;
-
+  cursor: pointer;
 }
 .tab i {
   font-size: 12px;
 }
 .tab a:hover,
 .logout-button:hover {
-  background: rgba(228, 221, 221, 0.1);
+  background: #cfe9df;
 }
 
 .submenu {
@@ -148,7 +149,7 @@
   color: #fff;
   padding: 15px 20px;
   font-size: 25px;
-  background: linear-gradient(180deg, #0c5c60, transparent);
+  background: linear-gradient(180deg, #9ed2be, transparent);
   cursor: pointer;
 }
 .navbar #sidebar-close {
@@ -233,11 +234,14 @@
     justify-content: center;
     height: 100vh;
     z-index: 100;
-    background-image:linear-gradient(rgba(0,0,0,0.5),rgba(0,0,0,0.5)), url(img/bg2.jpg);
+    background-image: linear-gradient(rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.1)), url(img/bg2.jpg);
     background-size: cover;
     background-repeat: no-repeat;
-    background-color: rgba(0, 0, 0, 0.5); 
+    background-color: rgba(0, 0, 0, 0.5);
   }
+  
+  
+  
   
   .main h1 {
     color: #fafafa;
@@ -266,14 +270,14 @@
     margin-top: 10px;
     border-radius: 15px;
     box-shadow: 1px 2px 10px 0px rgba(0, 0, 0, 0.3);
-    background: linear-gradient(45deg, #0c2727 0%, #1b5757 99%);
+    background: #9ed2be;
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#9bc635', endColorstr='#c0ea67', GradientType=1 );
     display: flex;
     flex-direction: column;
     align-items: left;
     justify-content: left;
    text-align: left;
-   color: #fff;
+   color: #000;
   }
 
   .box-a {
@@ -285,7 +289,7 @@
     margin-top: 10px;
     border-radius: 15px;
     box-shadow: 1px 2px 10px 0px rgba(0, 0, 0, 0.3);
-    background: linear-gradient(45deg, #0c2727 0%, #1b5757 99%);
+    background: #9ed2be;
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#9bc635', endColorstr='#c0ea67', GradientType=1 );
   }
 
@@ -309,7 +313,7 @@
     margin-top: 20px;
     border-radius: 15px;
     box-shadow: 1px 2px 10px 0px rgba(0, 0, 0, 0.3);
-    background: linear-gradient(45deg, #0c2727 0%, #1b5757 99%);
+    background: #9ed2be;
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#9bc635', endColorstr='#c0ea67', GradientType=1 );
     overflow-y: auto;
   }
@@ -318,11 +322,11 @@
     height: 70%;
     padding: 20px;
     width: auto;
-    margin-left: 30px;
+    margin-left: auto;
     margin-top: 20px;
     border-radius: 15px;
     box-shadow: 1px 2px 10px 0px rgba(0, 0, 0, 0.3);
-    background: linear-gradient(45deg, #0c2727 0%, #1b5757 99%);
+    background: #9ed2be;
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#9bc635', endColorstr='#c0ea67', GradientType=1 );
     overflow-y: auto;
   }
@@ -336,7 +340,7 @@
     margin-top: 20px;
     border-radius: 15px;
     box-shadow: 1px 2px 10px 0px rgba(0, 0, 0, 0.3);
-    background: linear-gradient(45deg, #0c2727 0%, #1b5757 99%);
+    background: #9ed2be;
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#9bc635', endColorstr='#c0ea67', GradientType=1 );
     overflow-y: auto;
   }
@@ -352,13 +356,13 @@
   .box-a, h2 {
     font-size: 20px;
     margin-bottom: 20px;
-    color: #fdfdfd; /* Title text color */
+    color: #000; /* Title text color */
   }
   /* CSS for box subtitles */
   .box,.box-a p {
     margin-top: 30px;
     font-size: 13px;
-    color: #ffffff; /* Subtitle text color */
+    color: #000; /* Subtitle text color */
   }
 
 /* CSS for the table inside .box-b */
@@ -366,6 +370,11 @@
 .box-c table {
   width: 100%;
   border-collapse: collapse;
+}
+
+.content-table-container {
+  border-radius: 10px; /* Add border-radius for circular edges */
+  overflow: hidden; /* Ensure that the border-radius is applied */
 }
 
 .box-b th,
@@ -376,69 +385,132 @@
   padding: 10px;
   text-align: left;
 }
-
 .box-b th, .box-c th {
-  background-color: #236d6d; /* Header background color */
+  background-color: #6c8484; /* Header background color */
   color: #fff; /* Header text color */
 }
 
 .box-b tr:nth-child(even), .box-c tr:nth-child(even) {
-  background-color: #1b5757; /* Background color for even rows */
-  color: #ffffff;
+  background-color: #cee9de; /* Background color for even rows */
+  color: #000;
 }
 
 .box-b tr:nth-child(odd), .box-c tr:nth-child(odd) {
-  background-color: #164646; /* Background color for odd rows */
-  color: #fff; /* Text color for odd rows */
+  background-color: #e1f2eb; /* Background color for odd rows */
+  color: #000; /* Text color for odd rows */
+}
+/* Styling the scrollbar for all browsers */
+.modal,
+.modal2,
+.box-b,
+.box-c {
+  scrollbar-width: thin; /* Width of the scrollbar */
+  scrollbar-color: #237846 #f5fbf8; /* Color of the scrollbar thumb and track */
 }
 
-/* Styling the scrollbar */
-.box-b:-webkit-scrollbar, .box-c::-webkit-scrollbar {
-  width: 12px; /* Width of the scrollbar */
+.modal::-webkit-scrollbar,
+.modal2::-webkit-scrollbar,
+.box-b::-webkit-scrollbar,
+.box-c::-webkit-scrollbar {
+  width: 12px; /* Width of the scrollbar for WebKit browsers */
 }
 
-.box-b:-webkit-scrollbar-thumb, .box-c::-webkit-scrollbar-thumb {
+.modal::-webkit-scrollbar-thumb,
+.modal2::-webkit-scrollbar-thumb,
+.box-b::-webkit-scrollbar-thumb,
+.box-c::-webkit-scrollbar-thumb {
   background-color: #237846; /* Color of the scrollbar thumb */
   border-radius: 6px; /* Rounded corners of the thumb */
 }
 
-.box-b:-webkit-scrollbar-thumb:hover, .box-c::-webkit-scrollbar-thumb:hover {
+.modal::-webkit-scrollbar-thumb:hover,
+.modal2::-webkit-scrollbar-thumb:hover,
+.box-b::-webkit-scrollbar-thumb:hover,
+.box-c::-webkit-scrollbar-thumb:hover {
   background-color: #70afaf; /* Color of the scrollbar thumb on hover */
 }
 
-.box-b:-webkit-scrollbar-track, .box-c::-webkit-scrollbar-track {
-  background-color: #1b5757; /* Color of the scrollbar track */
+.modal::-webkit-scrollbar-track,
+.modal2::-webkit-scrollbar-track,
+.box-b::-webkit-scrollbar-track,
+.box-c::-webkit-scrollbar-track {
+  background-color: transparent; /* Color of the scrollbar track */
 }
 
-.box-b:-webkit-scrollbar-track:hover, .box-c::-webkit-scrollbar-track:hover {
-  background-color: #1b5757; /* Color of the scrollbar track on hover */
+.modal::-webkit-scrollbar-track:hover,
+.modal2::-webkit-scrollbar-track:hover,
+.box-b::-webkit-scrollbar-track:hover,
+.box-c::-webkit-scrollbar-track:hover {
+  background-color: transparent; /* Color of the scrollbar track on hover */
 }
+
+/* Styling the scrollbar for the entire page */
+body {
+  scrollbar-width: thin; /* Width of the scrollbar */
+  scrollbar-color: transparent; /* Color of the scrollbar thumb and track */
+}
+
+body::-webkit-scrollbar {
+  width: 12px; /* Width of the scrollbar for WebKit browsers */
+}
+
+body::-webkit-scrollbar-thumb {
+  background-color: #237846; /* Color of the scrollbar thumb */
+  border-radius: 6px; /* Rounded corners of the thumb */
+}
+
+body::-webkit-scrollbar-thumb:hover {
+  background-color: #70afaf; /* Color of the scrollbar thumb on hover */
+}
+
+body::-webkit-scrollbar-track {
+  background-color: #4e6a5e; /* Color of the scrollbar track */
+}
+
+body::-webkit-scrollbar-track:hover {
+  background-color: #4e6a5e; /* Color of the scrollbar track on hover */
+}
+
+
 /* Style for the search bar */
-.search-bar { 
+.search-bar {
   align-items: center;
   margin-top: 20px;
   padding-bottom: 20px;
   display: flex;
 }
 
-.search-bar input {
+.search-bar input.search-input {
   width: 100%;
+  height: 50px;
   border: none;
   outline: none;
   flex-grow: 1;
   padding: 5px 10px;
-  border-radius: 10px; /* Rounded corners for the input */
+  border-radius: 10px;
+  border: 2px solid #00030b !important; /* Change to your desired color */
+  color: #000;
+
+  /* Set initial box-shadow to none */
+  box-shadow: none;
 }
+
+.search-bar input.search-input:focus {
+  /* Adjust the box-shadow when the input is focused */
+  box-shadow: 0 0 10px rgba(45, 55, 86, 0.9);
+}
+
 .search-bar .search-input {
-  /* Add your specific styles for the search input here */ /* Example background color */
-  color: #ffffff; 
+  /* Add your specific styles for the search input here */
+  /* Example background color */
+  color: #ffffff;
   width: 100%;
-  
 }
+
 
 /* Style for the h2 element */
 .box-b h2 {
-  color: #fff; /* Text color for the h2 element */
+  color: #000; /* Text color for the h2 element */
   margin-right: 10px; /* Add spacing between h2 and search bar */
   margin-bottom: -10px;
 }
@@ -450,6 +522,8 @@
 
 .filter-buttons button {
   background-color: white; /* Blue background color */
+  height: 60px;
+  width: 150px;
   border: none;
   color: black;
   padding: 5px 10px;
@@ -457,6 +531,7 @@
   cursor: pointer;
   border-radius: 10px;
   transition: background-color 0.3s ease;
+  font-weight: bold; 
 }
 
 .filter-buttons button:hover .arrow-button button:hover {
@@ -486,6 +561,12 @@
   color: white;
 }
 
+.readonly {
+  background-color: #360f0f; /* Change to your preferred background color */
+  color: #ff0000; /* Change to your preferred text color */
+  cursor: not-allowed;
+}
+
 /* For Arrow Button*/
 .arrow-button {
   cursor: pointer;
@@ -493,7 +574,7 @@
   outline: none;
   background: none;
   font-size: 30px;
-  color: white;
+  color: black;
   font-weight: bold;
   align-self: flex-end;
   margin-top: -15px;
@@ -527,7 +608,7 @@
   width: 80%;
   border-radius: 15px;
   box-shadow: 1px 2px 10px 0px rgba(0, 0, 0, 0.3);
-  background: linear-gradient(45deg, #0c2727 0%, #1b5757 99%);
+  background: #647c7c;
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#9bc635', endColorstr='#c0ea67', GradientType=1 );
   overflow-y: auto;
 }
@@ -617,15 +698,17 @@ label {
 /* Style for text inputs */
 input[type="text"],
 input[type="date"],
+input[type="date"],
+
 select {
   width: 350px;
   padding: 10px;
   margin-bottom: 10px;
-  border: 1px solid #ccc;
+  border: 2px solid #000000;
   border-radius: 4px;
   font-size: 15px;
   background-color: transparent; /* Make inputs transparent */
-  color: #fff; /* Text color */
+  color: #000; /* Text color */
 }
 
 /* Style for buttons */
@@ -731,6 +814,16 @@ select[name="status"] {
   width: 350px;
 }
 
+select[name="officer"] {
+  background-color: #fff; /* Set the background color to white */
+  color: #000; /* Set the text color to black */
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  padding: 8px;
+  font-size: 16px;
+  width: 350px;
+}
+
 /* Style for the Date input */
 input[type="datetime-local"] {
   background-color: #fff; /* Set the background color to white */
@@ -781,7 +874,7 @@ input:disabled {
 
 tr:hover{
   cursor: pointer;
-  background-color: #ee0707;
+  background-color: #7c9694;
 }
 
 #map {
@@ -797,22 +890,23 @@ tr:hover{
   height: 100%;
   background-color: rgba(0, 0, 0, 0.7);
   z-index: 1;
-  overflow: auto;
+  overflow: scroll;
 }
 
 .modal-content2 {
-  background-color: #0c2727;
+  background-color: #647c7c;
   margin: 10% auto;
   padding: 30px;
-  border: 1px solid #13ad05;
+  border: 1px solid #0c2727;
   border-radius: 5px;
   width: 40%;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
   position: relative;
+  overflow-y: auto;
 }
 .modal-content2 p{
   size: 30px;
-  color: #fff;
+  color: #000;
   margin-bottom: 8px;
 }
 /* Close button style */
@@ -843,25 +937,38 @@ tr:hover{
 
 form {
 	width: 100%;
-	padding: 20px;
+	padding: 10px;
+	border-radius: 6px;
+	background: #fff; 
+  color: #000;
+  background-color: #9ed2be;
+  margin-bottom: 10px;
+}
+
+.form2 {
+	width: 100%;
+	padding: 10px;
 	border-radius: 6px;
 	background: #fff;
-	box-shadow: 0 0 20px 0 #404040; 
+	box-shadow: 0 0 5px 0 #404040; 
   color: #fff;
-  background-color: #0c2727;
+  background-color: #cee9de;
+  margin-bottom: 10px;
 }
 
 input, textarea, select {
 	margin-bottom: 10px;
-	border: 1px solid #ccc;
+	border: 2px solid #000000;
 	border-radius: 3px;
-  background-color: #0c2727;
-  color: #fff;
+  background-color: #ffffff;
+  color: #000000;
 }
 
 input {
 	width: calc(100% - 10px);
 	padding: 7px;
+  border: 1px solid #000000;
+	border-radius: 3px;
 }
 
 select {
@@ -899,7 +1006,7 @@ textarea {
 
 .edit-button{
   padding: 5px 20px; /* Adjust padding as needed */
-  background-color: #6e9d45; /* Button background color */
+  background-color: #94c46a; /* Button background color */
   color: #fff; /* Text color */
   border: none; /* Remove button border */
   border-radius: 4px; /* Rounded corners */
@@ -946,7 +1053,7 @@ textarea {
   padding: 20px;
   border: 1px solid #ccc;
   border-radius: 8px;
-  background-color: #0c2727;
+  background-color: #9ed2be;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
   text-align: left;
 }
@@ -960,4 +1067,8 @@ textarea {
 .filter-buttons button:hover {
   background-color: #0056b3;
   transition: background-color 0.3s; /* Add a smooth transition effect */
+}
+
+.black-border {
+  border: 1px solid black;
 }

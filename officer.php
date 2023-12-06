@@ -9,9 +9,9 @@ if (!isset($_SESSION['user_id'])) {
     exit();
 }
 $databaseHost = 'localhost';
- $databaseUsername = 'u488180748_TDROB4t5s';
- $databasePassword = 'TDROB4t5s';
- $dbname = "u488180748_TDROB4t5s";
+$databaseUsername = 'u488180748_TDROB4t5s';
+$databasePassword = 'TDROB4t5s';
+$dbname = "u488180748_TDROB4t5s";
 
 // Connect to the newly created database
 $conn = new mysqli($databaseHost, $databaseUsername, $databasePassword, $dbname);
@@ -26,10 +26,10 @@ if ($conn->connect_error) {
     $result2 = $conn->query($sql)
     ?>
 <?php
-$databaseHost = 'localhost';
- $databaseUsername = 'u488180748_TDROB4t5s';
- $databasePassword = 'TDROB4t5s';
- $dbname = "u488180748_TDROB4t5s";
+ $databaseHost = 'localhost';
+$databaseUsername = 'u488180748_TDROB4t5s';
+$databasePassword = 'TDROB4t5s';
+$dbname = "u488180748_TDROB4t5s";
 
 // Connect to the newly created database
 $conn = new mysqli($databaseHost, $databaseUsername, $databasePassword, $dbname);
@@ -44,9 +44,9 @@ if ($conn->connect_error) {
 ?>
 <?php
 $databaseHost = 'localhost';
- $databaseUsername = 'u488180748_TDROB4t5s';
- $databasePassword = 'TDROB4t5s';
- $dbname = "u488180748_TDROB4t5s";
+$databaseUsername = 'u488180748_TDROB4t5s';
+$databasePassword = 'TDROB4t5s';
+$dbname = "u488180748_TDROB4t5s";
     
 $conn = new mysqli($databaseHost, $databaseUsername, $databasePassword, $dbname);
 
@@ -75,9 +75,9 @@ $sqlInfo = "SELECT * FROM data_info WHERE Name != 'unattended'";
 <!--UNATTENDED-->
 <?php
 $databaseHost = 'localhost';
- $databaseUsername = 'u488180748_TDROB4t5s';
- $databasePassword = 'TDROB4t5s';
- $dbname = "u488180748_TDROB4t5s";
+$databaseUsername = 'u488180748_TDROB4t5s';
+$databasePassword = 'TDROB4t5s';
+$dbname = "u488180748_TDROB4t5s";
 
 $conn = new mysqli($databaseHost, $databaseUsername, $databasePassword, $dbname);
 
@@ -91,9 +91,9 @@ $sqlInfoS = "SELECT * FROM data_info WHERE Name = 'unattended'";
 <!--OR NUMBER-->
 <?php
 $databaseHost = 'localhost';
- $databaseUsername = 'u488180748_TDROB4t5s';
- $databasePassword = 'TDROB4t5s';
- $dbname = "u488180748_TDROB4t5s";
+$databaseUsername = 'u488180748_TDROB4t5s';
+$databasePassword = 'TDROB4t5s';
+$dbname = "u488180748_TDROB4t5s";
 
 $conn = new mysqli($databaseHost, $databaseUsername, $databasePassword, $dbname);
 
@@ -107,9 +107,9 @@ $sqlInfoO = "SELECT * FROM data_info WHERE ORNo = NULL";
 <!--COUNTER WITH CONTACT-->
 <?php
 $databaseHost = 'localhost';
- $databaseUsername = 'u488180748_TDROB4t5s';
- $databasePassword = 'TDROB4t5s';
- $dbname = "u488180748_TDROB4t5s";
+$databaseUsername = 'u488180748_TDROB4t5s';
+$databasePassword = 'TDROB4t5s';
+$dbname = "u488180748_TDROB4t5s";
 
 $conn = new mysqli($databaseHost, $databaseUsername, $databasePassword, $dbname);
 
@@ -130,9 +130,9 @@ if ($resultCount) {
 <!--COUNTER WITH NO CONTACT-->
 <?php
 $databaseHost = 'localhost';
- $databaseUsername = 'u488180748_TDROB4t5s';
- $databasePassword = 'TDROB4t5s';
- $dbname = "u488180748_TDROB4t5s";
+$databaseUsername = 'u488180748_TDROB4t5s';
+$databasePassword = 'TDROB4t5s';
+$dbname = "u488180748_TDROB4t5s";
 
 $conn = new mysqli($databaseHost, $databaseUsername, $databasePassword, $dbname);
 
@@ -153,9 +153,9 @@ if ($resultCount) {
 <!--COUNTER MATERLIST-->
 <?php
 $databaseHost = 'localhost';
- $databaseUsername = 'u488180748_TDROB4t5s';
- $databasePassword = 'TDROB4t5s';
- $dbname = "u488180748_TDROB4t5s";
+$databaseUsername = 'u488180748_TDROB4t5s';
+$databasePassword = 'TDROB4t5s';
+$dbname = "u488180748_TDROB4t5s";
 
 $conn = new mysqli($databaseHost, $databaseUsername, $databasePassword, $dbname);
 
@@ -223,6 +223,15 @@ $resultInt = $conn->query($sqlInt);
       .donotShow_row {
           display: none;
       }
+      select[name="officer"] {
+      background-color: #fff; /* Set the background color to white */
+      color: #000; /* Set the text color to black */
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      padding: 8px;
+      font-size: 16px;
+      width: 350px;
+}
     </style>
     <link rel="shortcut icon" href="/img/logo.png" />
   </head>
@@ -274,28 +283,216 @@ $resultInt = $conn->query($sqlInt);
               <div class="modal-body">
     <div class="box-d">
 <form action="upload.php" method="POST">
-     <div class="form-row">
-        <div class="form-group">
-            <label for="date">Select Date & Time<span class="required">*</span></label>
-            <input type="datetime-local" name="date" required>
-        </div>
-        <div class="form-group">
-            <label for="officer">Officer:<span class="required">*</span></label>
-            <input type="text" name="officer" required>
-        </div>
+<div class="form-row">
+    <div class="form-group">
+        <label for="date">Select Date & Time<span class="required">*</span></label>
+        <input type="datetime-local" name="date" required>
     </div>
-    <div class="form-row">
-        <div class="form-group">
-            <label for="name">Name:<span class="required">*</span></label>
-            <input type="text" id="nameInput" name="name" required>
-            <button type="button" id="unattendedButton" onclick="handleUnattended()">Unattended</button>
-        </div>
 
-        <div class="form-group">
-            <label for="ticket_number">Ticket Number:<span class="required">*</span></label>
-            <input type="text" name="ticket_number" required>
-        </div>
+    <div class="form-group">
+        <label for="officer">Officer:<span class="required">*</span></label>
+        <select id="officer" name="officer" required>
+        <option value="">Select an Officer</option>
+        <option value="Abanador, Danilo Jr. G.">Abanador, Danilo Jr. G.</option>
+        <option value="Abapo, Juntopher M.">Abapo, Juntopher M.</option>
+        <option value="Aguado, Louie l.">Aguado, Louie l.</option>
+        <option value="Amoguis, Arnel P.">Amoguis, Arnel P.</option>
+        <option value="Andal, Raymond A.">Andal, Raymond A.</option>
+        <option value="Antenor, Bryan M.">Antenor, Bryan M.</option>
+        <option value="Atienza, Joel C.">Atienza, Joel C.</option>
+        <option value="Bagsit, Cesar B.">Bagsit, Cesar B.</option>
+        <option value="Baja, Joel C.">Baja, Joel C.</option>
+        <option value="Balason, Martin Jr. T.">Balason, Martin Jr. T.</option>
+        <option value="Balina, Zandro A.">Balina, Zandro A.</option>
+        <option value="Banaag, Edwin E.">Banaag, Edwin E.</option>
+        <option value="Biendima, Arnold J.">Biendima, Arnold J.</option>
+        <option value="Blanco, Alvin R.">Blanco, Alvin R.</option>
+        <option value="Blay, Arwin C.">Blay, Arwin C.</option>
+        <option value="Borbon, Derwin M.">Borbon, Derwin M.</option>
+        <option value="Caaway, Aldrin R.">Caaway, Aldrin R.</option>
+        <option value="Caaway, Marco R.">Caaway, Marco R.</option>
+        <option value="Calixtro, Alexander V.">Calixtro, Alexander V.</option>
+        <option value="Cantos, Pedro Jr. Q">Cantos, Pedro Jr. Q</option>
+        <option value="Castillo, Ryan A.">Castillo, Ryan A.</option>
+        <option value="Castro, Randy A.">Castro, Randy A.</option>
+        <option value="Catanyag, Urbano Jr. M.">Catanyag, Urbano Jr. M.</option>
+        <option value="Cepillo, Rafael Jr. A.">Cepillo, Rafael Jr. A.</option>
+        <option value="Clarin, Ronald R.">Clarin, Ronald R.</option>
+        <option value="Claveria, Michelle I.">Claveria, Michelle I.</option>
+        <option value="Codenera, Jerick B.">Codenera, Jerick B.</option>
+        <option value="Como, Marlon L.">Como, Marlon L.</option>
+        <option value="Como, Raymundo M.">Como, Raymundo M.</option>
+        <option value="Contreras, Ibraham">Contreras, Ibraham</option>
+        <option value="Cueto, Marcelino A.">Cueto, Marcelino A.</option>
+        <option value="Del Rosario, Everett C.">Del Rosario, Everett C.</option>
+        <option value="Delgado, Frederick M.">Delgado, Frederick M.</option>
+        <option value="Digol, Allan B.">Digol, Allan B.</option>
+        <option value="Dinglasan, Jomar M.">Dinglasan, Jomar M.</option>
+        <option value="Dinglasan, Loyd P.">Dinglasan, Loyd P.</option>
+        <option value="Duites, Ruel A.">Duites, Ruel A.</option>
+        <option value="Ebreo, Joel M.">Ebreo, Joel M.</option>
+        <option value="Espino, Derrick A.">Espino, Derrick A.</option>
+        <option value="Frane, Renee M.">Frane, Renee M.</option>
+        <option value="Garcia, Jessie Q.">Garcia, Jessie Q.</option>
+        <option value="Garcia, Michael A">Garcia, Michael A</option>
+        <option value="Gloria, Macario A.">Gloria, Macario A.</option>
+        <option value="Gutierres, Frederick R.">Gutierres, Frederick R.</option>
+        <option value="Herilla, Camill Jr. M.">Herilla, Camill Jr. M.</option>
+        <option value="Ilagan, Johnald D">Ilagan, Johnald D</option>
+        <option value="Intac, Rolando P.">Intac, Rolando P.</option>
+        <option value="Janier, Jerico C.">Janier, Jerico C.</option>
+        <option value="Jimenez, Rommel P.">Jimenez, Rommel P.</option>
+        <option value="Joven, Raul Jr. V.">Joven, Raul Jr. V.</option>
+        <option value="Legayada, Noe L.">Legayada, Noe L.</option>
+        <option value="Lira, Dexter M.">Lira, Dexter M.</option>
+        <option value="Lira, Roland A.">Lira, Roland A.</option>
+        <option value="Lumanglas, Jessa E.">Lumanglas, Jessa E.</option>
+        <option value="Macalalad, Fernando J.">Macalalad, Fernando J.</option>
+        <option value="Macatangay, Arsenio G.">Macatangay, Arsenio G.</option>
+        <option value="Macatangay, Herminio A.">Macatangay, Herminio A.</option>
+        <option value="Magaling, Ramil C.">Magaling, Ramil C.</option>
+        <option value="Manalo, Estanislao R. Jr.">Manalo, Estanislao R. Jr.</option>
+        <option value="Mangubat, Cesar D.">Mangubat, Cesar D.</option>
+        <option value="Marzonia, Michalle M.">Marzonia, Michalle M.</option>
+        <option value="Matala, Rico A.">Matala, Rico A.</option>
+        <option value="Matala, Romel U.">Matala, Romel U.</option>
+        <option value="Matira, Benjamin C.">Matira, Benjamin C.</option>
+        <option value="Medella, Julius R.">Medella, Julius R.</option>
+        <option value="Melgar, Reynaldo M.">Melgar, Reynaldo M.</option>
+        <option value="Melo Regie C.">Melo Regie C.</option>
+        <option value="Mendoza, Ronnie C.">Mendoza, Ronnie C.</option>
+        <option value="Naz, Mario J.">Naz, Mario J.</option>
+        <option value="Nepomuceno, Mark Angelo G.">Nepomuceno, Mark Angelo G.</option>
+        <option value="Pacia, Michelle M.">Pacia, Michelle M.</option>
+        <option value="Palmes, Anthony R.">Palmes, Anthony R.</option>
+        <option value="Panganiban, Jeremie L.">Panganiban, Jeremie L.</option>
+        <option value="Panopio, Jowie A.">Panopio, Jowie A.</option>
+        <option value="Pasia, Rhonny Boy D.">Pasia, Rhonny Boy D.</option>
+        <option value="Perez, Joylan M.">Perez, Joylan M.</option>
+        <option value="Pilapil, Mario Antonio C">Pilapil, Mario Antonio C</option>
+        <option value="Pitogo, Alma G.">Pitogo, Alma G.</option>
+        <option value="Plata, Jeffrey D.">Plata, Jeffrey D.</option>
+        <option value="Plata, Lecerio M.">Plata, Lecerio M.</option>
+        <option value="Pornasdoro, Andy C.">Pornasdoro, Andy C.</option>
+        <option value="Quijada, Rick Jayson D.">Quijada, Rick Jayson D.</option>
+        <option value="Raboy, Junniel A.">Raboy, Junniel A.</option>
+        <option value="Ramos, Emmanuel P.">Ramos, Emmanuel P.</option>
+        <option value="Ramos, Gerry M.">Ramos, Gerry M.</option>
+        <option value="Ramos, Kenette Francis T.">Ramos, Kenette Francis T.</option>
+        <option value="Real, Joel L.">Real, Joel L.</option>
+        <option value="Refereza, Dante B.">Refereza, Dante B.</option>
+        <option value="Rianzares, Ricardo A.">Rianzares, Ricardo A.</option>
+        <option value="Ruben, Romy V.">Ruben, Romy V.</option>
+        <option value="Salido, Hermie B.">Salido, Hermie B.</option>
+        <option value="Sanchez, Bobby A.">Sanchez, Bobby A.</option>
+        <option value="Sanohan, Benjamin M.">Sanohan, Benjamin M.</option>
+        <option value="Santiago, Albert M.">Santiago, Albert M.</option>
+        <option value="Serrano, Rowell C.">Serrano, Rowell C.</option>
+        <option value="Tagle, Winston C.">Tagle, Winston C.</option>
+        <option value="Tamayo, Josen G.">Tamayo, Josen G.</option>
+        <option value="Tolentino, Faustino Jr. C.">Tolentino, Faustino Jr. C.</option>
+        <option value="Torres, Angelino B.">Torres, Angelino B.</option>
+        <option value="Tuazon, Reynaldo P.">Tuazon, Reynaldo P.</option>
+        <option value="Valencia, Micko Angelo B.">Valencia, Micko Angelo B.</option>
+        <option value="Vichozo, Jayvon Wally L.">Vichozo, Jayvon Wally L.</option>
+        <option value="Victoria, Rolando S.">Victoria, Rolando S.</option>
+        <option value="Ylagan, Ismael B.">Ylagan, Ismael B.</option>
+        <option value="Vergara, Cristopher D.">Vergara, Cristopher D.</option>
+        </select>
+    </div>  
+</div>
+
+<script>
+//modal
+
+const openModalButtons = document.querySelectorAll('[data-modal-target]');
+const closeModalButtons = document.querySelectorAll('[data-close-button]');
+const overlay = document.getElementById('overlay');
+
+console.log(openModalButtons);
+
+openModalButtons.forEach(button => {
+    button.addEventListener('click', () => {
+        const modal = document.querySelector(button.dataset.modalTarget);
+        openModal(modal);
+    });
+});
+
+closeModalButtons.forEach(button => {
+    button.addEventListener('click', () => {
+        const modal = button.closest('.modal');
+        closeModal(modal);
+    });
+});
+
+overlay.addEventListener('click', () => {
+    const modals = document.querySelectorAll('.modal.active');
+    modals.forEach(modal => {
+        closeModal(modal);
+    });
+});
+
+function openModal(modal) {
+    if (modal == null) return;
+    modal.classList.add('active');
+    overlay.classList.add('active');
+}
+
+function closeModal(modal) {
+    if (modal == null) return;
+    modal.classList.remove('active');
+    overlay.classList.remove('active');
+}
+</script>
+
+<div class="form-row">
+    <div class="form-group">
+        <label for="name">Name:<span class="required" >*</span></label>
+        <input type="text" id="name" name="name" required>
+        <button type="button" id="unattendedButton" onclick="handleUnattended()">Unattended</button>
     </div>
+
+<script>
+    function handleUnattended() {
+        // Readonly the specified fields and add the 'readonly' class
+        setReadonlyAndAddClass("or_number");
+        setReadonlyAndAddClass("or_date");
+        setReadonlyAndAddClass("status");
+        setReadonlyAndAddClass("cnc");
+        setReadonlyAndAddClass("name");
+
+        // Set default values
+        document.getElementById("status").value = "Unsettled";
+        document.getElementById("cnc").value = "NC";
+        document.getElementById("name").value = "Unattended";
+    }
+
+    function setReadonlyAndAddClass(elementId) {
+        var element = document.getElementById(elementId);
+        element.readOnly = true;
+        element.classList.add("readonly");
+    }
+</script>
+   
+
+    <div class="form-group">
+    <label for="ticket_number">Ticket Number:<span class="required">*</span></label>
+    <input type="text" name="ticket_number" id="ticket_number_input" required maxlength="6">
+
+    </div>
+</div>
+
+<script>
+        document.getElementById('ticket_number_input').addEventListener('input', function () {
+            // Remove non-numeric characters
+            this.value = this.value.replace(/\D/g, '');
+
+            // Limit the length to 6 characters
+            if (this.value.length > 6) {
+                this.value = this.value.slice(0, 6);
+            }
+        });
+    </script>
 
     <div class="form-row">
     <div class="form-group">
@@ -378,8 +575,8 @@ document.addEventListener('DOMContentLoaded', function () {
         <input type="text" name="plate_number">
     </div>
     <div class="form-group">
-        <label for="cnc">C/NC:<span class="required">*</span></label>
-        <select name="cnc" required>
+        <label for="cnc">C/NC:<span class="required" >*</span></label>
+        <select id="cnc" name="cnc" required class="disabled-field">
             <option value="C">C</option>
             <option value="NC">NC</option>
         </select>
@@ -388,19 +585,41 @@ document.addEventListener('DOMContentLoaded', function () {
 
 <div class="form-row">
     <div class="form-group">
-        <label for="or_number">OR Number:</label>
-        <input type="text" name="or_number" id="or_number" class="disabled-field">
+    <label for="or_number">OR Number:</label>
+    <input type="text" name="or_number" id="or_number" class="disabled-field">
+    <p id="or_number_error" style="color: red; display: none; font-size: 12px;">OR Number must be at least 7 characters.</p>
     </div>
+    <script>
+        var orNumberInput = document.getElementById('or_number_input');
+        var orNumberError = document.getElementById('or_number_error');
+
+        orNumberInput.addEventListener('input', function () {
+            // Remove non-numeric characters
+            this.value = this.value.replace(/\D/g, '');
+
+            // Check if the length is less than 7 and display the error message
+            if (this.value.length < 7) {
+                orNumberError.style.display = 'block';
+            } else {
+                orNumberError.style.display = 'none';
+            }
+
+            // Limit the length to a maximum of 10 characters
+            if (this.value.length > 10) {
+                this.value = this.value.slice(0, 10);
+            }
+        });
+    </script>
     <div class="form-group">
         <label for="license_number">License Number:</label>
-        <input type="text" name="license_number" id="license_number">
+        <input type="text" name="license_number" id="license_number" maxlength="11">
     </div>
 </div>
 
 <div class="form-row">
     <div class="form-group">
         <label for="or_date">OR Date:</label>
-        <input type="date" name="or_date" id="or_date" class="disabled-field">
+        <input type="date" name="or_date" id="or_date">
     </div>
     <div class="form-group">
         <label for="status">Status:<span class="required">*</span></label>
@@ -424,91 +643,6 @@ document.addEventListener('DOMContentLoaded', function () {
     </div>
 </div>
     </form>
-
-<script>
-  //modal
-
-const openModalButtons = document.querySelectorAll('[data-modal-target]');
-const closeModalButtons = document.querySelectorAll('[data-close-button]');
-const overlay = document.getElementById('overlay');
-
-console.log(openModalButtons);
-
-openModalButtons.forEach(button => {
-    button.addEventListener('click', () => {
-        const modal = document.querySelector(button.dataset.modalTarget);
-        openModal(modal);
-    });
-});
-
-closeModalButtons.forEach(button => {
-    button.addEventListener('click', () => {
-        const modal = button.closest('.modal');
-        closeModal(modal);
-    });
-});
-
-overlay.addEventListener('click', () => {
-    const modals = document.querySelectorAll('.modal.active');
-    modals.forEach(modal => {
-        closeModal(modal);
-    });
-});
-
-function openModal(modal) {
-    if (modal == null) return;
-    modal.classList.add('active');
-    overlay.classList.add('active');
-}
-
-function closeModal(modal) {
-    if (modal == null) return;
-    modal.classList.remove('active');
-    overlay.classList.remove('active');
-}
-
-
-        overlay.addEventListener('click', () => {
-          const modals = document.querySelectorAll('.modal.active')
-          modals.forEach(modal => {
-              closeModal(modal)
-  })
-})
-
-closeModalButtons.forEach(button => {
-  button.addEventListener('click', () => {
-    const modal = button.closest('.modal')
-    closeModal(modal)
-  })
-})
-
-function openModal(modal) {
-  if (modal == null) return
-  modal.classList.add('active')
-  overlay.classList.add('active')
-}
-
-function closeModal(modal) {
-  if (modal == null) return
-  modal.classList.remove('active')
-  overlay.classList.remove('active')
-}
-function handleUnattended() {
-  // Disable and clear OR Number and OR Date inputs
-  document.getElementById("or_number").disabled = true;
-  document.getElementById("or_number").value = "";
-  document.getElementById("or_date").disabled = true;
-  document.getElementById("or_date").value = "";
-
-  // Set Status to "Failed"
-  document.getElementById("status").value = "Failed";
-
-  // Set CNC to "NC"
-  document.querySelector('select[name="cnc"]').value = "NC";
-  const nameInput = document.getElementById("nameInput");
-  nameInput.value = "Unattended";
-}
-</script>
 
       </nav>
       <main class="main">
@@ -537,6 +671,7 @@ function handleUnattended() {
             <div class="box-b" style="margin: auto;">
             <h2 style="margin-bottom: 10px;">Violation List</h2>
            <?php if ($result2->num_rows > 0) : ?>
+        <div class="content-table-container">
         <table class="content-table">
             <thead>
                 <tr>
@@ -555,6 +690,7 @@ function handleUnattended() {
                 <?php endwhile; ?>
             </tbody>
         </table>
+                </div>
     <?php else : ?>
         <p>No Violations Found</p>
     <?php endif; ?>
@@ -581,6 +717,7 @@ function handleUnattended() {
                 </div>
                 <div id="searchResults">
                 <?php if ($resultInfo->num_rows > 0) : ?>
+    <div class="content-table-container">
         <table class="content-table">
             <thead>
                 <tr>
@@ -601,6 +738,7 @@ function handleUnattended() {
                 <?php endwhile; ?>
             </tbody>
         </table>
+    </div>
     <?php else : ?>
         <p>No Violator Found</p>
     <?php endif; ?>
@@ -629,6 +767,7 @@ function handleUnattended() {
                 </div>
                 <div id="searchResults2">
                 <?php if ($resultInfoS->num_rows > 0) : ?>
+    <div class="content-table-container">
         <table class="content-table">
             <thead>
                 <tr>
@@ -649,6 +788,7 @@ function handleUnattended() {
                 <?php endwhile; ?>
             </tbody>
         </table>
+    </div>
     <?php else : ?>
         <p>No Violator Found</p>
     <?php endif; ?>
@@ -733,10 +873,11 @@ function handleUnattended() {
            <div class="box-b">
              <h2>List of Total Apprehension with Contact and No Contact</h2>
              <div class="search-bar">
-             <input type="text" class="search-input" id="searchInput3" placeholder="Search by Name or #">
+                  <input type="text" class="search-input" id="searchInput3" placeholder="Search by Name or Plate #">
            </div>
            <div id="searchResults3">
            <?php if ($result->num_rows > 0) : ?>
+    <div class="content-table-container">
         <table class="content-table">
             <thead>
                 <tr>
@@ -759,6 +900,7 @@ function handleUnattended() {
                 <?php endwhile; ?>
             </tbody>
         </table>
+    </div>
     <?php else : ?>
         <p>No Violator Found</p>
     <?php endif; ?>
@@ -794,13 +936,13 @@ function handleUnattended() {
            <!-- master-list CONTENT -->
            <div class="box-b" style="height: 600px;">
   <div class="search-bar">
-    <form method="post" action="">
+    <form class="form2" method="post" action="">
       <input type="text" class="search-input" name="search" placeholder="Search by Name or #">
       <button class="edit-button" type="submit">Search</button>
-    </form>
+    
   </div>
   <div class="filter-buttons">
-    <form method="post" action="">
+    
       <button type="submit" name="filter" value="all"><i aria-hidden="true"></i> Show All</button>
       <button type="submit" name="filter" value="settled"><i aria-hidden="true"></i> Settled List</button>
       <button type="submit" name="filter" value="unsettled"><i aria-hidden="true"></i> Unsettled List</button>
@@ -809,7 +951,9 @@ function handleUnattended() {
   </div>
   <div id="searchResults4">
                 <?php if ($resultInt->num_rows > 0) : ?>
+                    <div class="content-table-container">
                   <div class="content-table">
+                    
               <table >
                   <thead>
                           <th>Ticket No.</th>
@@ -829,9 +973,6 @@ function handleUnattended() {
                               <td><?= $row['ORNo'] ?></td>
                               <td><?= $row['ORDate'] ?></td>
                               <td><?= $row['Status'] ?></td>
-                              <td>
-                                <button class="delete-button" data-row-id="<?= $row['id'] ?>">Delete</button>
-                            </td>
                           </tr>
                       <?php endwhile; ?>
                   </tbody>
@@ -840,6 +981,7 @@ function handleUnattended() {
                   <p>No Violators Found</p>
               <?php endif; ?>
           </div>
+              </div>
           </div>
       </div>
         <!-- Hidden modal for violator details -->
@@ -847,8 +989,10 @@ function handleUnattended() {
     <div class="modal-content2">
         <span class="close2" id="closeModal">&times;</span>
         <h1 style="font-weight: bolder; color: #fff; font-size: 30px; margin-top: -50px">Violator's Details</h1><br> 
-            <div id="modalContent2"></div>
-            <div id="modalContent"></div>
+        <div class="box-c">
+                <div id="modalContent2"></div>
+                <div id="modalContent"></div>
+            </div>
         </div>
         <script>
           //============MODAL TAB============
@@ -1001,11 +1145,11 @@ $(document).ready(function() {
                 var orDateInput = $("<input type='date' id='ORDateInput' value='" + $("#ORDate").text() + "'>");
 
                 // Show the input fields
-                modalContent.append("<p><strong>Name:</strong></p>").append(nameInput);
-                modalContent.append("<p><strong>LicenseNumber:</strong></p>").append(licenseNumberInput);
-                modalContent.append("<p><strong>ORNo:</strong></p>").append(orNoInput);
-                modalContent.append("<p><strong>ORDate:</strong></p>").append(orDateInput);
-                modalContent.append("<p><strong>Status:</strong></p>").append(statusDropdown);
+                modalContent.append("<p><strong>Name:</strong></p>").append(nameInput.attr('style', 'border: 2px solid black;'));
+                modalContent.append("<p><strong>LicenseNumber:</strong></p>").append(licenseNumberInput.attr('style', 'border: 2px solid black;'));
+                modalContent.append("<p><strong>ORNo:</strong></p>").append(orNoInput.attr('style', 'border: 2px solid black;'));
+                modalContent.append("<p><strong>ORDate:</strong></p>").append(orDateInput.attr('style', 'border: 2px solid black;'));
+                modalContent.append("<p><strong>Status:</strong></p>").append(statusDropdown.attr('style', 'border: 2px solid black;'));
 
                 var saveButton = $("<button>Save</button>").addClass("edit-button");
 
